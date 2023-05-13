@@ -1,0 +1,78 @@
+﻿<Window x:Class="LabourExchange.Forms.RegisterNewAnketaView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xct="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  
+        xmlns:local="clr-namespace:LabourExchange.Forms"
+        xmlns:local1="clr-namespace:LabourExchange"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        Title="Новый пользователь" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DialogHost.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Margin="20"  >
+            <TextBox x:Name="txtFam"
+                             materialDesign:HintAssist.Hint="Укажите фамилию"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox x:Name="txtName"                              
+                             materialDesign:HintAssist.Hint="Укажите имя"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            
+            <TextBox x:Name="txtOtch"                              
+                             materialDesign:HintAssist.Hint="Укажите отчество"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <xct:MaskedTextBox 
+                             x:Name="txtPassport"
+                             Mask="00 00 000000"                           
+                             materialDesign:HintAssist.Hint="Укажите паспортные данные"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            <xct:MaskedTextBox 
+                             Mask="+7 (000) 000-00-00"
+                             x:Name="txtTelefon"                              
+                             materialDesign:HintAssist.Hint="Укажите телефон"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            <TextBox  x:Name="txtEmail"                              
+                             materialDesign:HintAssist.Hint="Укажите Email"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            <TextBox materialDesign:HintAssist.Hint="Укажите рабочий стаж"
+                             x:Name="txtStage"
+                             TextChanged="txtStage_TextChanged"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                
+                <TextBox.Text>
+                    <Binding Path="SelectedAnketum.KolYear" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <local1:RangeValidationRule Minimum="0" Maximum="50" ValidationStep="RawProposedValue" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="txtLogin"                              
+                             materialDesign:HintAssist.Hint="Укажите логин"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            <TextBox x:Name="txtPassword"                              
+                             materialDesign:HintAssist.Hint="Укажите пароль"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            <Button Content="Сохранить" x:Name="btnSave" Click="btnSave_Click" Margin="10" />
+            <Button Content="Отмена" x:Name="btnCancel" Click="btnCancel_Click" Margin="10" />
+        </StackPanel>
+    </Grid>
+</Window>

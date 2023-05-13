@@ -1,0 +1,97 @@
+﻿<Page x:Class="LabourExchange.Forms.EmploymentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:xct="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LabourExchange.Forms"
+      mc:Ignorable="d" 
+      Loaded="Page_Loaded"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Трудоустройство">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="10">
+            <GroupBox Header="Укажите параметры поиска">
+                <StackPanel Margin="10">
+
+                    <ComboBox x:Name="comboAnketa" SelectionChanged="comboAnketa_SelectionChanged"/>
+
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="1">Стаж</Label>
+                        <Label Grid.Column="1" Grid.Row="1" x:Name="lblStag"></Label>
+                        <Label Grid.Column="0" Grid.Row="2">Профессия</Label>
+                        <Label Grid.Column="1" Grid.Row="2" x:Name="lblProfession"></Label>
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button Content="Поиск" Width="100" Margin="0 0 10 0" 
+                                x:Name="btnFindVacation" Click="btnFindVacation_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Вакансия" Margin="0,10,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0">Фирма</Label>
+                    <Label Grid.Column="1" Grid.Row="0" x:Name="FirmName" ></Label>
+                    <Label Grid.Column="0" Grid.Row="1">Должность</Label>
+                    <Label Grid.Column="1" Grid.Row="1" x:Name="Dolzh" ></Label>
+                    <Label Grid.Column="0" Grid.Row="2">Образование</Label>
+                    <Label Grid.Column="1" Grid.Row="2" x:Name="Zhilish" ></Label>
+                    <Label Grid.Column="0" Grid.Row="3">Условия работы</Label>
+                    <Label Grid.Column="1" Grid.Row="3" x:Name="Usloviya" ></Label>
+                    <Label Grid.Column="0" Grid.Row="4">Требования</Label>
+                    <Label Grid.Column="1" Grid.Row="4" x:Name="Trebovanie" ></Label>
+                </Grid>
+            </GroupBox>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Margin="5" x:Name="btnNext" Click="btnNext_Click"
+                        Content="Предыдущая">
+                </Button>
+                <Label VerticalAlignment="Center" x:Name="lblNumber"></Label>
+                <Label VerticalAlignment="Center" Content=" из "></Label>
+                <Label VerticalAlignment="Center" x:Name="lblAllNumber"></Label>
+                <Button Margin="5" x:Name="btnPrev" Click="btnPrev_Click"
+                        Content="Следующая">
+                </Button>
+            </StackPanel>
+            <Button Width="350" x:Name="btnOffer" Click="btnOffer_Click"
+                        Content="Предложить вакансию"
+                        HorizontalAlignment="Right" Cursor="Hand">
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,40 @@
+﻿<Window x:Class="LabourExchange.Forms.WorkSceduleEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xct="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  
+        xmlns:local="clr-namespace:LabourExchange.Forms"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        Title="График работы" Height="150" Width="300">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Название" VerticalAlignment="Center" Grid.Row="0" Margin="5" Grid.Column="0"/>
+            <TextBox x:Name="txtName"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="0" Grid.Column="1"/>
+
+            <TextBlock Text="Продолжительность" VerticalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0"/>
+            <xct:MaskedTextBox 
+                x:Name="txtDuration" 
+                             Mask="00"
+                             Grid.Row="1" Grid.Column="1"                            
+                             materialDesign:HintAssist.Hint="Укажите паспортные данные" />
+
+            <Button x:Name="btnCancel" Content="Отменить" Width="140" Height="25" Grid.Row="2" Grid.Column="0" Click="btnCancel_Click"/>
+            <Button x:Name="btnOk" Content="Сохранить" Width="140" Height="25" Grid.Row="2" Grid.Column="1" Click="btnOk_Click"/>
+        </Grid>
+    </Grid>
+</Window>
