@@ -11,8 +11,9 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
-        Title="Параметры отправки писем"  Height="185" Width="267" >
+        Title="Параметры отправки писем"  Height="300" Width="267" >
     <Grid>
+
         <StackPanel Margin="10">
             <TextBox  x:Name="txtLogin"                            
                              materialDesign:HintAssist.Hint="Укажите Email"
@@ -20,6 +21,14 @@
             <TextBox  x:Name="txtPassword"                          
                              materialDesign:HintAssist.Hint="Укажите пароль"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox  x:Name="txtSmtp"                            
+                             materialDesign:HintAssist.Hint="Укажите SMTP"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox  x:Name="txtPort"                            
+                             materialDesign:HintAssist.Hint="Укажите Port"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            <CheckBox x:Name="checkSSL"  IsChecked="True" Content="SSL" Margin="50,10,10,0" />
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
                 

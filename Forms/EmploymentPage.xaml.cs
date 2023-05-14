@@ -21,6 +21,7 @@ using OfficeOpenXml.Style;
 using OfficeOpenXml;
 using System.IO;
 using Microsoft.Win32;
+using Xceed.Wpf.Toolkit;
 
 namespace LabourExchange.Forms
 {
@@ -161,14 +162,18 @@ namespace LabourExchange.Forms
                     package.Save();
 
                 }
-                MessageBox.Show("Отчет сформирован!");
+                MessageBoxResult result = System.Windows.MessageBox.Show("Отчет сформирован! \r\n Хотите отправить почту?", "Внимание!", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
-                string recipient = bezWork.Email;
-                string subject = "Трудоустройство";
-                string body = "Трудоустройство в " + vacancy.FirmaName;
-                string attachmentPath = filname;
 
-                Ut.SendEmailWithAttachment(recipient, subject, body, attachmentPath);
+                if(result == MessageBoxResult.OK)
+                {
+                    string recipient = bezWork.Email;
+                    string subject = "Трудоустройство";
+                    string body = "Трудоустройство в " + vacancy.FirmaName;
+                    string attachmentPath = filname;
+
+                    Ut.SendEmailWithAttachment(recipient, subject, body, attachmentPath);
+                }
             }
         }
 

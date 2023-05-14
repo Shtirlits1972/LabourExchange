@@ -13,6 +13,8 @@ using CommunityToolkit.Mvvm.DependencyInjection;
 using LabourExchange.Model;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Runtime.Remoting.Messaging;
+using static OfficeOpenXml.ExcelErrorValue;
+using System.Windows.Input;
 
 namespace LabourExchange
 {
@@ -28,20 +30,16 @@ namespace LabourExchange
         {
             try
             {
-                var Login = ConfigurationManager.AppSettings["login"];   // doc.SelectSingleNode("//appSettings/add[@key='login']").Attributes["value"].Value;
-                var Password = ConfigurationManager.AppSettings["password"];   //doc.SelectSingleNode("//appSettings/add[@key='password']").Attributes["value"].Value;
-
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-                string smtpServer = "smtp.mail.ru";
-                int smtpPort = 587;
-                string login = Login;
-                string password = Password;
+                string login = ConfigurationManager.AppSettings["login"];   // doc.SelectSingleNode("//appSettings/add[@key='login']").Attributes["value"].Value;
+                string password = ConfigurationManager.AppSettings["password"];   //doc.SelectSingleNode("//appSettings/add[@key='password']").Attributes["value"].Value;
+                string smtpServer = ConfigurationManager.AppSettings["smtp"];
+                int smtpPort = int.Parse(ConfigurationManager.AppSettings["port"]);
+                bool ssl = bool.Parse(ConfigurationManager.AppSettings["ssl"]);
 
                 // Создаем клиент SMTP
                 SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort);
                 smtpClient.Credentials = new NetworkCredential(login, password);
-                smtpClient.EnableSsl = true;
+                smtpClient.EnableSsl = ssl;
 
                 // Создаем объект MailMessage
                 MailMessage mailMessage = new MailMessage();
@@ -54,6 +52,7 @@ namespace LabourExchange
 
                 // Отправляем письмо
                 smtpClient.Send(mailMessage);
+                MessageBox.Show("Почта отправлена","Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {

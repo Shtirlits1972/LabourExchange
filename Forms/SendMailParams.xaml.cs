@@ -18,9 +18,6 @@ using static OfficeOpenXml.ExcelErrorValue;
 
 namespace LabourExchange.Forms
 {
-    /// <summary>
-    /// Логика взаимодействия для SendMailParams.xaml
-    /// </summary>
     public partial class SendMailParams : Window
     {
         public SendMailParams()
@@ -32,16 +29,24 @@ namespace LabourExchange.Forms
         {
             txtLogin.Text = ConfigurationManager.AppSettings["login"];
             txtPassword.Text = ConfigurationManager.AppSettings["password"];
+
+            txtSmtp.Text = ConfigurationManager.AppSettings["smtp"];
+            txtPort.Text = ConfigurationManager.AppSettings["port"];
+            checkSSL.IsChecked = bool.Parse(ConfigurationManager.AppSettings["ssl"]);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 configuration.AppSettings.Settings["login"].Value = txtLogin.Text;
                 configuration.AppSettings.Settings["password"].Value = txtPassword.Text;
+
+                configuration.AppSettings.Settings["smtp"].Value = txtSmtp.Text;
+                configuration.AppSettings.Settings["port"].Value = txtPort.Text;
+                configuration.AppSettings.Settings["ssl"].Value = checkSSL.IsChecked.Value.ToString();
+
                 configuration.Save(ConfigurationSaveMode.Full, true);
                 ConfigurationManager.RefreshSection("appSettings");
             }
@@ -49,7 +54,6 @@ namespace LabourExchange.Forms
             {
                 MessageBox.Show(ex.Message);
             }
-
             Close();
         }
 
