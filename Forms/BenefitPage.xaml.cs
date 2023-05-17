@@ -57,10 +57,13 @@ namespace LabourExchange.Forms
             BenefitEdit.ShowDialog();
 
             Benefit model = BenefitEdit.model;
-            BenefitList.Add(model);
-            gridMain.ItemsSource = BenefitList;
-            gridMain.Items.Refresh();
 
+            if (model != null)
+            {
+                BenefitList.Add(model);
+                gridMain.ItemsSource = BenefitList;
+                gridMain.Items.Refresh();
+            }
         }
         private void bEdit_Click(object sender, RoutedEventArgs e)
         {
@@ -73,19 +76,22 @@ namespace LabourExchange.Forms
                 edit.model = model;
                 edit.ShowDialog();
 
-                model = edit.model;
-
-                for (int i = 0; i < BenefitList.Count; i++)
+                if (model != null)
                 {
-                    Benefit item = BenefitList[i];
+                    model = edit.model;
 
-                    if (model.Id == item.Id)
+                    for (int i = 0; i < BenefitList.Count; i++)
                     {
-                        BenefitList[i] = model;
-                        break;
+                        Benefit item = BenefitList[i];
+
+                        if (model.Id == item.Id)
+                        {
+                            BenefitList[i] = model;
+                            break;
+                        }
                     }
+                    gridMain.Items.Refresh();
                 }
-                gridMain.Items.Refresh();
             }
             else
             {

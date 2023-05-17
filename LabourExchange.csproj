@@ -160,6 +160,9 @@
     <Compile Include="Forms\AnketaPage.xaml.cs">
       <DependentUpon>AnketaPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AnketaUserPage.xaml.cs">
+      <DependentUpon>AnketaUserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\BenefitEdit.xaml.cs">
       <DependentUpon>BenefitEdit.xaml</DependentUpon>
     </Compile>
@@ -246,6 +249,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\AnketaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\AnketaUserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -27,17 +27,35 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="Фирма" VerticalAlignment="Center" Grid.Row="0" Margin="5" Grid.Column="0"/>
-        <ComboBox x:Name="comboFirma"   Grid.Column="1" FontSize="15" Grid.Row="0" />
-        
+
+        <DockPanel  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">
+            <ComboBox x:Name="comboFirma"  Width="340" Margin="0,0,0,0"  FontSize="15"  />
+            <Button Content="+" x:Name="btnAddFirm" Width="40" Margin="5,0,5,0" Click="btnAddFirm_Click"/>
+        </DockPanel>
+
         <TextBlock Text="Образование" VerticalAlignment="Center" Grid.Row="1" Margin="5" Grid.Column="0"/>
-        <ComboBox x:Name="comboEducation"   Grid.Column="1" FontSize="15" Grid.Row="1" />
+
+        <DockPanel  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
+            <ComboBox x:Name="comboEducation" Width="340" Margin="0,0,0,0" FontSize="15"   />
+            <Button Content="+" x:Name="btnAddEducation" Width="40" Margin="5,0,5,0" Click="btnAddEducation_Click"/>
+        </DockPanel>
+
         
         <TextBlock Text="Должность" VerticalAlignment="Center" Grid.Row="2" Margin="5" Grid.Column="0"/>
-        <ComboBox x:Name="comboPosition"   Grid.Column="1" FontSize="15" Grid.Row="2" />
+
+        <DockPanel  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
+            <ComboBox x:Name="comboPosition"  Width="340"   FontSize="15"  />
+            <Button Content="+" x:Name="btnAddPosition" Width="40" Margin="5,0,5,0" Click="btnAddPosition_Click"/>
+        </DockPanel>
+        
         
         <TextBlock Text="График" VerticalAlignment="Center" Grid.Row="3" Margin="5" Grid.Column="0"/>
-        <ComboBox x:Name="comboWorkScedule"   Grid.Column="1" FontSize="15" Grid.Row="3" />
-        
+
+        <DockPanel  Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left">
+            <ComboBox x:Name="comboWorkScedule"  Width="340" Margin="0,0,0,0"   Grid.Column="1" FontSize="15" Grid.Row="3" />
+            <Button Content="+" x:Name="btnAddWorkScedule" Width="40" Margin="5,0,5,0" Click="btnAddWorkScedule_Click"/>
+        </DockPanel>
+
         <TextBlock Text="Оплата" VerticalAlignment="Center" Grid.Row="4" Margin="5" Grid.Column="0"/>
         <TextBox x:Name="txtUsloviyWorkOplata"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="4" Grid.Column="1"/>
         

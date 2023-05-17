@@ -78,15 +78,18 @@
                 </Grid>
             </GroupBox>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <Button Margin="5" x:Name="btnNext" Click="btnNext_Click"
+                <Button Margin="5" x:Name="btnPrev" Click="btnPrev_Click"
                         Content="Предыдущая">
                 </Button>
+
                 <Label VerticalAlignment="Center" x:Name="lblNumber"></Label>
                 <Label VerticalAlignment="Center" Content=" из "></Label>
                 <Label VerticalAlignment="Center" x:Name="lblAllNumber"></Label>
-                <Button Margin="5" x:Name="btnPrev" Click="btnPrev_Click"
-                        Content="Следующая">
+
+                <Button Margin="5" x:Name="btnNext" Click="btnNext_Click"
+                        Content=" Следующая">
                 </Button>
+
             </StackPanel>
             <Button Width="350" x:Name="btnOffer" Click="btnOffer_Click"
                         Content="Предложить вакансию"

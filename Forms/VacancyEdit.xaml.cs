@@ -144,5 +144,65 @@ namespace LabourExchange.Forms
                 #endregion
             }
         }
+
+        private void btnAddEducation_Click(object sender, RoutedEventArgs e)
+        {
+            EducationEdit educationEdit = new EducationEdit();
+            educationEdit.IsEdit = false;
+            educationEdit.ShowDialog();
+
+            Education model = educationEdit.model;
+
+            if (model != null)
+            {
+                comboEducation.ItemsSource = EducationCrud.GetAll().OrderBy(x => x.Id).ToList();
+                comboEducation.SelectedIndex = comboEducation.Items.Count - 1;
+            }
+        }
+
+        private void btnAddPosition_Click(object sender, RoutedEventArgs e)
+        {
+            PositionEdit PositionEdit = new PositionEdit();
+            PositionEdit.IsEdit = false;
+            PositionEdit.ShowDialog();
+
+            Position model = PositionEdit.model;
+
+            if (model != null)
+            {
+                comboPosition.ItemsSource = PositionCrud.GetAll().OrderBy(x => x.Id).ToList();
+                comboPosition.SelectedIndex = comboPosition.Items.Count - 1;
+            }
+        }
+
+        private void btnAddFirm_Click(object sender, RoutedEventArgs e)
+        {
+            FirmaEdit FirmaEdit = new FirmaEdit();
+            FirmaEdit.IsEdit = false;
+            FirmaEdit.ShowDialog();
+
+            Firma model = FirmaEdit.model;
+
+            if (model != null)
+            {
+                comboFirma.ItemsSource = FirmaCrud.GetAll().OrderBy(x => x.Id).ToList();
+                comboFirma.SelectedIndex = comboFirma.Items.Count - 1;
+            }
+        }
+
+        private void btnAddWorkScedule_Click(object sender, RoutedEventArgs e)
+        {
+            WorkSceduleEdit WorkSceduleEdit = new WorkSceduleEdit();
+            WorkSceduleEdit.IsEdit = false;
+            WorkSceduleEdit.ShowDialog();
+
+            WorkScedule model = WorkSceduleEdit.model;
+
+            if (model != null)
+            {
+                comboWorkScedule.ItemsSource = WorkSceduleCrud.GetAll().OrderBy(x => x.Id).ToList();
+                comboWorkScedule.SelectedIndex = comboWorkScedule.Items.Count - 1;
+            }
+        }
     }
 }

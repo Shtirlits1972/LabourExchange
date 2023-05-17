@@ -47,5 +47,10 @@ namespace LabourExchange.Forms
             IsRegister = true;
             Close();
         }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Close();
+        }
     }
 }

@@ -26,13 +26,14 @@ namespace LabourExchange.CRUD
             return list;
         }
 
-        public static List<Vacancy> GetAll(int EducationId, int PositionId)
+        public static List<Vacancy> GetAll(int EducationId, int PositionId, int AnketaId)
         {
             List<Vacancy> list = new List<Vacancy>();
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                list = db.Query<Vacancy>("SELECT Id, FirmaId, FirmaName, EducationId, EducationName, PositionId, PositionName, WorkSceduleId, WorkSceduleName, UsloviyWorkOplata, Trebovan, Priznak, Sex FROM VacancyView WHERE EducationId = @EducationId AND PositionId = @PositionId ;", new { EducationId, PositionId }).ToList();
+                list = db.Query<Vacancy>("SELECT Id, FirmaId, FirmaName, EducationId, EducationName, PositionId, PositionName, WorkSceduleId, WorkSceduleName, UsloviyWorkOplata, Trebovan, Priznak, Sex FROM VacancyView WHERE (EducationId = @EducationId) AND (PositionId = @PositionId) "
+                    + " AND Id NOT IN ( SELECT VacancyId FROM AnketaVacancyLink WHERE AnketaId = @AnketaId ) ; ", new { EducationId, PositionId, AnketaId }).ToList();
             }
 
             return list;
@@ -84,6 +85,14 @@ namespace LabourExchange.CRUD
                 model.Id = Id;
             }
             return model;
+        }
+
+        public static void AddAnketaVacancyLink(int VacancyId, int AnketaId)
+        {
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                db.Query(" INSERT INTO AnketaVacancyLink ( VacancyId, AnketaId ) VALUES(@VacancyId, @AnketaId);  ", new { VacancyId, AnketaId });
+            }
         }
     }
 }

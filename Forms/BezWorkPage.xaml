@@ -85,7 +85,6 @@
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Анкета" Binding="{Binding AnketaName, Mode=OneWay}"/>
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Образование" Binding="{Binding EducationName, Mode=OneWay}"/>
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Должность" Binding="{Binding PositionName, Mode=OneWay}"/>
-                <DataGridTextColumn Foreground="Black" Width="10*" Header="Пособие" Binding="{Binding BenefitValue, Mode=OneWay}"/>
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Профессия" Binding="{Binding Professional, Mode=OneWay}"/>
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Место работы" Binding="{Binding MestoWork, Mode=OneWay}"/>
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Причина увольнения" Binding="{Binding PrichinaUvoln, Mode=OneWay}"/>

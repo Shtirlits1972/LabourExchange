@@ -32,14 +32,12 @@ namespace LabourExchange.Forms
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            int intStag = 0;
-            int.TryParse(txtStage.Text, out intStag);
-
-            Anketa anketa = new Anketa { Id = 0, Email = txtEmail.Text, Fam = txtFam.Text, Name = txtName.Text, Otch = txtOtch.Text, Pasport = txtPassport.Text, Telephone = txtTelefon.Text, KolYear = intStag };
-            anketa = AnketaCrud.Add(anketa);
-
-            Users users = new Users { Id = 0, AnketaId = anketa.Id, Login = txtLogin.Text, Password = txtPassport.Text, Role = "user" };
+            Users users = new Users { Id = 0,  Login = txtLogin.Text, Password = txtPassword.Text, Role = "user" };
             Ut.currentUser = UsersCrud.Add(users);
+
+            //Anketa anketa = new Anketa { Id = 0, Email = "", Fam = "", Name = "", Otch = "", Pasport = "", Telephone = "", KolYear = 0, UserId = users.Id };
+            //anketa = AnketaCrud.Add(anketa);
+
             IsReg = true;
 
             Close();
@@ -50,22 +48,22 @@ namespace LabourExchange.Forms
             Close();
         }
 
-        private void txtStage_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            int Stag = 0;
-            bool flag = int.TryParse(txtStage.Text.Trim(), out Stag);
+        //private void txtStage_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    int Stag = 0;
+        //    bool flag = int.TryParse(txtStage.Text.Trim(), out Stag);
 
-            if (!flag)
-            {
-                txtStage.Text = "";
-            }
-            else
-            {
-                if ((Stag < 0) || (Stag > 50))
-                {
-                    txtStage.Text = "";
-                }
-            }
-        }
+        //    if (!flag)
+        //    {
+        //        txtStage.Text = "";
+        //    }
+        //    else
+        //    {
+        //        if ((Stag < 0) || (Stag > 50))
+        //        {
+        //            txtStage.Text = "";
+        //        }
+        //    }
+        //}
     }
 }

@@ -23,6 +23,8 @@ namespace LabourExchange.Forms
         public BenefitEdit()
         {
             InitializeComponent();
+            comboAnketa.ItemsSource = AnketaCrud.GetAll();
+            comboAnketa.SelectedIndex = 0;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -33,7 +35,7 @@ namespace LabourExchange.Forms
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            model.Name = txtName.Text;
+            model.Deskr = txtDeskr.Text;
 
             int intVal = 0;
             if (int.TryParse(txtVal.Text.Replace("_", "").Trim(), out intVal))
@@ -43,6 +45,9 @@ namespace LabourExchange.Forms
 
             model.Data_Vyplaty = (DateTime)picData_Vyplaty.SelectedDate;
             model.Data_Postanovki = (DateTime)picData_Postanovki.SelectedDate;
+
+            model.AnketaId = ((Anketa)comboAnketa.SelectedItem).Id;
+            model.AnketaName = ((Anketa)comboAnketa.SelectedItem).ToString();
 
             if (IsEdit)
             {
@@ -59,7 +64,7 @@ namespace LabourExchange.Forms
         {
             if (IsEdit)
             {
-                txtName.Text = model.Name;
+                txtDeskr.Text = model.Deskr;
                 txtVal.Text = model.Val.ToString();
 
                 picData_Vyplaty.SelectedDate = model.Data_Vyplaty;
@@ -67,15 +72,71 @@ namespace LabourExchange.Forms
 
                 picData_Postanovki.SelectedDate = model.Data_Postanovki;
                 picData_Postanovki.DisplayDate = model.Data_Postanovki;
+
+                #region Anketa
+                for (int i = 0; i < comboAnketa.Items.Count; i++)
+                {
+                    Anketa tmp = (Anketa)comboAnketa.Items[i];
+                    if (tmp.Id == model.AnketaId)
+                    {
+                        comboAnketa.SelectedIndex = i;
+                        break;
+                    }
+                }
+                #endregion
             }
             else
             {
-                picData_Vyplaty.SelectedDate = DateTime.Now; 
+                picData_Vyplaty.SelectedDate = DateTime.Now;
                 picData_Vyplaty.DisplayDate = DateTime.Now;
 
                 picData_Postanovki.SelectedDate = DateTime.Now;
                 picData_Postanovki.DisplayDate = DateTime.Now;
             }
+        }
+
+        private void comboAnketa_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Anketa anketa = (Anketa)comboAnketa.SelectedItem;
+            int intValue = 0;
+
+            DateTime dateTime = DateTime.Now;
+            if (dateTime.AddYears(-64) > anketa.Birthday)
+            {
+                intValue = 5500;
+            }
+            else
+            {
+                if(anketa.KolYear <= 3)
+                {
+                    intValue = 1500;
+                }
+                else if(anketa.KolYear >=3 && anketa.KolYear <=6)
+                {
+                    intValue = 3000;
+                }
+
+
+                else if (anketa.KolYear >= 6 && anketa.KolYear <= 8)
+                {
+                    intValue = 5000;
+                }
+                else if (anketa.KolYear >= 8 && anketa.KolYear <= 11)
+                {
+                    intValue = 7000;
+                }
+                else if (anketa.KolYear >= 11 && anketa.KolYear <= 15)
+                {
+                    intValue = 9000;
+                }
+                else if (anketa.KolYear >= 16)
+                {
+                    intValue = 12000;
+                }
+            }
+            
+            txtVal.Text = intValue.ToString();
+
         }
     }
 }

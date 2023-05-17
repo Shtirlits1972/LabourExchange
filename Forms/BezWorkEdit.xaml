@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LabourExchange.Forms"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
         Title="Безработный" Height="550" Width="800">
     <Grid>
@@ -19,50 +20,58 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="60"/>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="Анкета" VerticalAlignment="Center" Grid.Row="0" Margin="5" Grid.Column="0"/>
         <ComboBox x:Name="comboAnketa"   Grid.Column="1" FontSize="15" Grid.Row="0" />
 
-        <TextBlock Text="Образование" VerticalAlignment="Center" Grid.Row="1" Margin="5" Grid.Column="0"/>
-        <ComboBox x:Name="comboEducation"   Grid.Column="1" FontSize="15" Grid.Row="1" />
+        <TextBlock Text="Образование" VerticalAlignment="Center" Grid.Row="1" Margin="5" Grid.Column="0" />
+
+        <DockPanel  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
+            <ComboBox x:Name="comboEducation" Width="340" Margin="0,0,0,0" FontSize="15"   />
+            <Button Content="+" x:Name="btnAddEducation" Width="40" Margin="5,0,5,0" Click="btnAddEducation_Click"/>
+        </DockPanel>
 
         <TextBlock Text="Должность" VerticalAlignment="Center" Grid.Row="2" Margin="5" Grid.Column="0"/>
-        <ComboBox x:Name="comboPosition"   Grid.Column="1" FontSize="15" Grid.Row="2" />
+        <DockPanel  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
+            <ComboBox x:Name="comboPosition"  Width="340"   FontSize="15"  />
+            <Button Content="+" x:Name="btnAddPosition" Width="40" Margin="5,0,5,0" Click="btnAddPosition_Click"/>
+        </DockPanel>
 
-        <TextBlock Text="Пособие" VerticalAlignment="Center" Grid.Row="3" Margin="5" Grid.Column="0"/>
-        <ComboBox x:Name="comboBenefit"   Grid.Column="1" FontSize="15" Grid.Row="3" />
 
-        <TextBlock Text="Профессия" VerticalAlignment="Center" Grid.Row="4" Margin="5" Grid.Column="0"/>
-        <TextBox x:Name="txtProfessiona"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="4" Grid.Column="1"/>
 
-        <TextBlock Text="Место работы" VerticalAlignment="Center" Grid.Row="5" Margin="5" Grid.Column="0"/>
-        <TextBox x:Name="txtMestoWork"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="5" Grid.Column="1"/>
+        <TextBlock Text="Профессия" VerticalAlignment="Center" Grid.Row="3" Margin="5" Grid.Column="0"/>
+        <TextBox x:Name="txtProfessiona"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="3" Grid.Column="1"/>
 
-        <TextBlock Text="Причина увольнения" VerticalAlignment="Center" Grid.Row="6" Margin="5" Grid.Column="0"/>
-        <TextBox x:Name="txtPrichinaUvoln"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="6" Grid.Column="1"/>
+        <TextBlock Text="Место работы" VerticalAlignment="Center" Grid.Row="4" Margin="5" Grid.Column="0"/>
+        <TextBox x:Name="txtMestoWork"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="4" Grid.Column="1"/>
 
-        <TextBlock Text="Семейное положение" VerticalAlignment="Center" Grid.Row="7" Margin="5" Grid.Column="0"/>
-        <ComboBox x:Name="comboFamilyStatus"   Grid.Column="1" FontSize="15" Grid.Row="7" />
+        <TextBlock Text="Причина увольнения" VerticalAlignment="Center" Grid.Row="5" Margin="5" Grid.Column="0"/>
+        <TextBox x:Name="txtPrichinaUvoln"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="5" Grid.Column="1"/>
 
-        <TextBlock Text="Контакты" VerticalAlignment="Center" Grid.Row="8" Margin="5" Grid.Column="0"/>
-        <TextBox x:Name="txtKontaktKoord"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="8" Grid.Column="1"/>
+        <TextBlock Text="Семейное положение" VerticalAlignment="Center" Grid.Row="6" Margin="5" Grid.Column="0"/>
+        <DockPanel  Grid.Row="6"  Grid.Column="1" HorizontalAlignment="Left">
+            <ComboBox x:Name="comboFamilyStatus" Width="340"  FontSize="15"  />
+            <Button Content="+" x:Name="btnFamilyStatus" Width="40" Margin="5,0,5,0" Click="btnFamilyStatus_Click"/>
+        </DockPanel>
 
-        <TextBlock Text="Требования" VerticalAlignment="Center" Grid.Row="9" Margin="5" Grid.Column="0"/>
-        <TextBox x:Name="txtTrebov_K_Work"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="9" Grid.Column="1"/>
+        <TextBlock Text="Контакты" VerticalAlignment="Center" Grid.Row="7" Margin="5" Grid.Column="0"/>
+        <TextBox x:Name="txtKontaktKoord"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="7" Grid.Column="1"/>
 
-        <TextBlock Text="Архив" VerticalAlignment="Center" Grid.Row="10" Margin="5" Grid.Column="0"/>
-        <CheckBox x:Name="checkArhiv"  IsChecked="False" Height="20" Width="20"   Grid.Row="10" Margin="20,0,20,0" Grid.Column="1" />
+        <TextBlock Text="Требования" VerticalAlignment="Center" Grid.Row="8" Margin="5" Grid.Column="0"/>
+        <TextBox x:Name="txtTrebov_K_Work"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="8" Grid.Column="1"/>
 
-        <Button x:Name="btnCancel" Content="Отменить" Width="140" Height="30" Grid.Row="11" Grid.Column="0" Click="btnCancel_Click"/>
-        <Button x:Name="btnOk" Content="Сохранить" Width="140" Height="30" Grid.Row="11" Grid.Column="1" Click="btnOk_Click"/>
+        <TextBlock Text="Архив" VerticalAlignment="Center" Grid.Row="9" Margin="5" Grid.Column="0"/>
+        <CheckBox x:Name="checkArhiv"  IsChecked="False" Height="20" Width="20"   Grid.Row="9" Margin="20,0,20,0" Grid.Column="1" />
+
+        <Button x:Name="btnCancel" Content="Отменить" Width="140" Height="30" Grid.Row="10" Grid.Column="0" Click="btnCancel_Click"/>
+        <Button x:Name="btnOk" Content="Сохранить" Width="140" Height="30" Grid.Row="10" Grid.Column="1" Click="btnOk_Click"/>
         
     </Grid>
 </Window>

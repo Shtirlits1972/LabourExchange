@@ -82,11 +82,12 @@
             <DataGrid.Columns>
 
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="ИД" Binding="{Binding Id, Mode=OneWay}" Visibility="Hidden"/>
-                <DataGridTextColumn Foreground="Black" Width="10*" Header="Название" Binding="{Binding Name, Mode=OneWay}"/>
+                <DataGridTextColumn Foreground="Black" Width="10*" Header="Анкета" Binding="{Binding AnketaName, Mode=OneWay}"/>
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Размер" Binding="{Binding Val, Mode=OneWay}"/>
 
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Дата выплаты" Binding="{Binding Data_Vyplaty, Mode=OneWay, StringFormat=dd.MM.yyyy}"/>
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Дата постановки" Binding="{Binding Data_Postanovki, Mode=OneWay, StringFormat=dd.MM.yyyy}"/>
+                <DataGridTextColumn Foreground="Black" Width="10*" Header="Примечание" Binding="{Binding Deskr, Mode=OneWay}"/>
 
             </DataGrid.Columns>
 

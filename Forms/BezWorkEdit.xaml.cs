@@ -33,19 +33,14 @@ namespace LabourExchange.Forms
             comboPosition.ItemsSource = PositionCrud.GetAll();
             comboPosition.SelectedIndex = 0;
 
-            comboBenefit.ItemsSource = BenefitCrud.GetAll();
-            comboBenefit.SelectedIndex = 0;
-
             comboFamilyStatus.ItemsSource = FamilyStatusCrud.GetAll();
             comboFamilyStatus.SelectedIndex = 0;
         }
-
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             model = null;
             Close();
         }
-
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
             model.AnketaId = ((Anketa)comboAnketa.SelectedItem).Id;
@@ -56,9 +51,6 @@ namespace LabourExchange.Forms
 
             model.PositionId = ((Position)comboPosition.SelectedItem).Id;
             model.PositionName = ((Position)comboPosition.SelectedItem).Name;
-
-            model.BenefitId = ((Benefit)comboBenefit.SelectedItem).Id;
-            model.BenefitValue = ((Benefit)comboBenefit.SelectedItem).Val;
 
             model.Professional = txtProfessiona.Text;
             model.MestoWork = txtMestoWork.Text;
@@ -82,12 +74,10 @@ namespace LabourExchange.Forms
             }
             Close();
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (IsEdit)
             {
-
                 #region Anketa
                 for (int i = 0; i < comboAnketa.Items.Count; i++)
                 {
@@ -124,21 +114,9 @@ namespace LabourExchange.Forms
                 }
                 #endregion
 
-                #region Benefit
-                for (int i = 0; i < comboBenefit.Items.Count; i++)
-                {
-                    Benefit tmp = (Benefit)comboBenefit.Items[i];
-                    if (tmp.Id == model.BenefitId)
-                    {
-                        comboBenefit.SelectedIndex = i;
-                        break;
-                    }
-                }
-                #endregion
-
                 txtProfessiona.Text = model.Professional;
                 txtMestoWork.Text = model.MestoWork;
-                txtPrichinaUvoln.Text =model.PrichinaUvoln;
+                txtPrichinaUvoln.Text = model.PrichinaUvoln;
 
                 #region FamilyStatus
                 for (int i = 0; i < comboFamilyStatus.Items.Count; i++)
@@ -156,7 +134,48 @@ namespace LabourExchange.Forms
                 txtTrebov_K_Work.Text = model.Trebov_K_Work;
 
                 checkArhiv.IsChecked = model.Arhiv;
+            }
+        }
+        private void btnAddEducation_Click(object sender, RoutedEventArgs e)
+        {
+            EducationEdit educationEdit = new EducationEdit();
+            educationEdit.IsEdit = false;
+            educationEdit.ShowDialog();
 
+            Education model = educationEdit.model;
+
+            if (model != null)
+            {
+                comboEducation.ItemsSource = EducationCrud.GetAll().OrderBy(x => x.Id).ToList();
+                comboEducation.SelectedIndex = comboEducation.Items.Count - 1;
+            }
+        }
+        private void btnAddPosition_Click(object sender, RoutedEventArgs e)
+        {
+            PositionEdit PositionEdit = new PositionEdit();
+            PositionEdit.IsEdit = false;
+            PositionEdit.ShowDialog();
+
+            Position model = PositionEdit.model;
+
+            if (model != null)
+            {
+                comboPosition.ItemsSource = PositionCrud.GetAll().OrderBy(x => x.Id).ToList();
+                comboPosition.SelectedIndex = comboPosition.Items.Count - 1;
+            }
+        }
+        private void btnFamilyStatus_Click(object sender, RoutedEventArgs e)
+        {
+            FamilyStatusEdit FamilyStatusEdit = new FamilyStatusEdit();
+            FamilyStatusEdit.IsEdit = false;
+            FamilyStatusEdit.ShowDialog();
+
+            FamilyStatus model = FamilyStatusEdit.model;
+
+            if (model != null)
+            {
+                comboFamilyStatus.ItemsSource = FamilyStatusCrud.GetAll().OrderBy(x => x.Id).ToList();
+                comboFamilyStatus.SelectedIndex = comboFamilyStatus.Items.Count - 1;
             }
         }
     }

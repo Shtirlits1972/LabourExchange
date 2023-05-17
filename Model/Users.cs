@@ -11,8 +11,12 @@ namespace LabourExchange.Model
         public int Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public int AnketaId { get; set; }
         public string Role { get; set; }
+
+        public override string ToString()
+        {
+            return Login;
+        }
 
     }
 }

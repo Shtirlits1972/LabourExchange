@@ -44,6 +44,7 @@
 
                 <Button Margin="5" IsCancel="True"
                         Style="{StaticResource MaterialDesignFlatButton}"
+                        x:Name="btnCancel" Click="btnCancel_Click"
                         Content="Выход">
                 </Button>
 

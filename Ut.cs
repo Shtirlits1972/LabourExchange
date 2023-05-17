@@ -26,6 +26,20 @@ namespace LabourExchange
 
         public static string[] SexArr = {"Муж", "Жен" };
 
+        public static bool IsMoreThen16(DateTime dateTime)
+        {
+            bool flag = false;
+            double dub16Years = 16 * 365; // 5840
+            TimeSpan timeSpan = DateTime.Now - dateTime;
+
+            if(timeSpan.TotalDays >= dub16Years)
+            {
+                flag = true;
+            }
+
+            return flag;
+        }
+
         public static void SendEmailWithAttachment(string recipient, string subject, string body, string attachmentPath)
         {
             try

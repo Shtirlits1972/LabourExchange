@@ -9,14 +9,15 @@
         Loaded="Window_Loaded"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Пособие" Height="200" Width="300">
+        Title="Пособие" Height="230" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40*"/>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -24,8 +25,8 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Название" VerticalAlignment="Center" Grid.Row="0" Margin="5" Grid.Column="0"/>
-        <TextBox x:Name="txtName"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="0" Grid.Column="1"/>
+        <TextBlock Text="Анкета" VerticalAlignment="Center" Grid.Row="0" Margin="5" Grid.Column="0"/>
+        <ComboBox x:Name="comboAnketa"   Grid.Column="1" FontSize="15" Grid.Row="0" SelectionChanged="comboAnketa_SelectionChanged" />
 
         <TextBlock Text="Размер" VerticalAlignment="Center" Grid.Row="1" Margin="5" Grid.Column="0"/>
         <xct:MaskedTextBox 
@@ -40,8 +41,13 @@
         <TextBlock Text="Дата постановки" VerticalAlignment="Center" Grid.Row="3" Margin="5" Grid.Column="0"/>
         <DatePicker x:Name="picData_Postanovki" Grid.Row="3" Grid.Column="1" Width="145" Height="25" HorizontalAlignment="Left" FontWeight="Medium" FontSize="12"/>
 
-        <Button x:Name="btnCancel" Content="Отменить" Width="140" Height="25" Grid.Row="4" Grid.Column="0" Click="btnCancel_Click"/>
-        <Button x:Name="btnOk" Content="Сохранить" Width="140" Height="25" Grid.Row="4" Grid.Column="1" Click="btnOk_Click"/>
+        <TextBlock Text="Примечание" VerticalAlignment="Center" Grid.Row="4" Margin="5" Grid.Column="0"/>
+        <TextBox x:Name="txtDeskr"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="4" Grid.Column="1"/>
+
+        <Button x:Name="btnCancel" Content="Отменить" Width="140" Height="25" Grid.Row="5" Grid.Column="0" Click="btnCancel_Click"/>
+        <Button x:Name="btnOk" Content="Сохранить" Width="140" Height="25" Grid.Row="5" Grid.Column="1" Click="btnOk_Click"/>
     </Grid>
 </Window>
 
+
+<!--AnketaId, AnketaName, Val, Data_Vyplaty, Data_Postanovki, Deskr-->

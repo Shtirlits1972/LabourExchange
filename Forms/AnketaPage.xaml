@@ -102,6 +102,7 @@
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Стаж" Binding="{Binding KolYear, Mode=OneWay}"/>
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Email" Binding="{Binding Email, Mode=OneWay}"/>
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Телефон" Binding="{Binding Telephone, Mode=OneWay}"/>
+                <DataGridTextColumn Foreground="Black" Width="10*" Header="Дата рождения" Binding="{Binding Birthday, StringFormat=dd.MM.yyyy, Mode=OneWay}"/>
 
             </DataGrid.Columns>
 

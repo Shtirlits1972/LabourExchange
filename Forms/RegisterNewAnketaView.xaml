@@ -10,6 +10,7 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
+        Topmost="True"
         Title="Новый пользователь" Height="450" Width="800">
     <Window.Resources>
         <ResourceDictionary>
@@ -23,46 +24,7 @@
     </Window.Resources>
     <Grid>
         <StackPanel Margin="20"  >
-            <TextBox x:Name="txtFam"
-                             materialDesign:HintAssist.Hint="Укажите фамилию"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-            <TextBox x:Name="txtName"                              
-                             materialDesign:HintAssist.Hint="Укажите имя"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             
-            <TextBox x:Name="txtOtch"                              
-                             materialDesign:HintAssist.Hint="Укажите отчество"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-            <xct:MaskedTextBox 
-                             x:Name="txtPassport"
-                             Mask="00 00 000000"                           
-                             materialDesign:HintAssist.Hint="Укажите паспортные данные"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-
-            <xct:MaskedTextBox 
-                             Mask="+7 (000) 000-00-00"
-                             x:Name="txtTelefon"                              
-                             materialDesign:HintAssist.Hint="Укажите телефон"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-
-            <TextBox  x:Name="txtEmail"                              
-                             materialDesign:HintAssist.Hint="Укажите Email"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-
-            <TextBox materialDesign:HintAssist.Hint="Укажите рабочий стаж"
-                             x:Name="txtStage"
-                             TextChanged="txtStage_TextChanged"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                
-                <TextBox.Text>
-                    <Binding Path="SelectedAnketum.KolYear" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" ValidatesOnDataErrors="True">
-                        <Binding.ValidationRules>
-                            <local1:RangeValidationRule Minimum="0" Maximum="50" ValidationStep="RawProposedValue" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
-
             <TextBox x:Name="txtLogin"                              
                              materialDesign:HintAssist.Hint="Укажите логин"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />

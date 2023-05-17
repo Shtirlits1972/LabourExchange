@@ -20,18 +20,19 @@ namespace LabourExchange.CRUD
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                list = db.Query<Benefit>("SELECT Id, Name, Val, Data_Vyplaty, Data_Postanovki  FROM Benefit").ToList();
+                list = db.Query<Benefit>("SELECT Id, AnketaId, AnketaName, Val, Data_Vyplaty, Data_Postanovki, Deskr  FROM BenefitView ").ToList();
             }
 
             return list;
         }
+
         public static Benefit GetOne(int Id)
         {
             Benefit model = null;
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                model = db.Query<Benefit>("SELECT Id, Name, Val, Data_Vyplaty, Data_Postanovki FROM Benefit WHERE Id = @Id;", new { Id }).FirstOrDefault();
+                model = db.Query<Benefit>("SELECT Id, AnketaId, AnketaName, Val, Data_Vyplaty, Data_Postanovki, Deskr FROM BenefitView WHERE Id = @Id;", new { Id }).FirstOrDefault();
             }
 
             return model;
@@ -47,7 +48,7 @@ namespace LabourExchange.CRUD
         {
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                var Query = "UPDATE Benefit SET Name = @Name, Val = @Val, Data_Vyplaty = @Data_Vyplaty, Data_Postanovki = @Data_Postanovki WHERE Id = @Id;";
+                var Query = "UPDATE Benefit SET AnketaId = @AnketaId, Val = @Val, Data_Vyplaty = @Data_Vyplaty, Data_Postanovki = @Data_Postanovki, Deskr = @Deskr WHERE Id = @Id;";
                 db.Execute(Query, model);
             }
         }
@@ -55,7 +56,7 @@ namespace LabourExchange.CRUD
         {
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                var Query = "INSERT INTO Benefit (Name, Val, Data_Vyplaty, Data_Postanovki) VALUES(@Name, @Val, @Data_Vyplaty, @Data_Postanovki); SELECT CAST(SCOPE_IDENTITY() as int)";
+                var Query = "INSERT INTO Benefit (AnketaId, Val, Data_Vyplaty, Data_Postanovki, Deskr) VALUES(@AnketaId, @Val, @Data_Vyplaty, @Data_Postanovki, @Deskr); SELECT CAST(SCOPE_IDENTITY() as int)";
                 int Id = db.Query<int>(Query, model).FirstOrDefault();
                 model.Id = Id;
             }

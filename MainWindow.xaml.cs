@@ -26,6 +26,7 @@ namespace LabourExchange
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
+            login.Owner = this;
             login.ShowDialog();
 
             if(login.IsRegister)
@@ -39,9 +40,20 @@ namespace LabourExchange
                 }
             }
 
-            if(Ut.currentUser.Role == "user")
+            MenuExit.Visibility = Visibility.Visible;
+
+            if (Ut.currentUser.Role == "admin")
             {
-                MenuReferences.Visibility = Visibility.Collapsed;
+                MenuReferences.Visibility = Visibility.Visible;
+                MenuBezWorkFindJob.Visibility = Visibility.Visible;
+                MenuFindInPage.Visibility = Visibility.Visible;
+                MenuEmployment.Visibility = Visibility.Visible;
+                MenuParam.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                frmContent.NavigationService.Navigate(new Uri("Forms/AnketaUserPage.xaml", UriKind.Relative));
+                Title = "Личный кабинет";
             }
         }
 

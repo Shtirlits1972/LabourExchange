@@ -20,8 +20,8 @@ namespace LabourExchange.CRUD
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                list = db.Query<BezWork>("SELECT Id, AnketaId, AnketaName, Stag, Email, EducationId, EducationName, PositionId, PositionName, BenefitId, BenefitValue, Professional, "
-                    + " MestoWork, PrichinaUvoln, FamilyStatusId, FamilyStatusName, KontaktKoord, Trebov_K_Work, Arhiv  FROM BezWorkView WHERE Stag >= @Stag AND LOWER(Professional) LIKE LOWER('%"+ Profession + "%')", new { Stag }).ToList();
+                list = db.Query<BezWork>("SELECT Id, AnketaId, AnketaName, Stag, Email, EducationId, EducationName, PositionId, PositionName, Professional,  MestoWork, PrichinaUvoln, FamilyStatusId, "
+                    + " FamilyStatusName, KontaktKoord, Trebov_K_Work, Birthday, UserId, Arhiv  FROM BezWorkView WHERE Stag >= @Stag AND LOWER(Professional) LIKE LOWER('%" + Profession + "%')", new { Stag }).ToList();
             }
 
             return list;
@@ -33,8 +33,8 @@ namespace LabourExchange.CRUD
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                list = db.Query<BezWork>("SELECT Id, AnketaId, AnketaName, Stag, Email, EducationId, EducationName, PositionId, PositionName, BenefitId, BenefitValue, Professional, "
-                    + " MestoWork, PrichinaUvoln, FamilyStatusId, FamilyStatusName, KontaktKoord, Trebov_K_Work, Arhiv  FROM BezWorkView").ToList();
+                list = db.Query<BezWork>("SELECT Id, AnketaId, AnketaName, Stag, Email, EducationId, EducationName, PositionId, PositionName, Professional, "
+                    + " MestoWork, PrichinaUvoln, FamilyStatusId, FamilyStatusName, KontaktKoord, Trebov_K_Work, Birthday, UserId, Arhiv  FROM BezWorkView").ToList();
             }
 
             return list;
@@ -46,8 +46,8 @@ namespace LabourExchange.CRUD
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                model = db.Query<BezWork>("SELECT Id, AnketaId, AnketaName, Stag,  Email, EducationId, EducationName, PositionId, PositionName, BenefitId, BenefitValue, Professional, "
-                    + " MestoWork, PrichinaUvoln, FamilyStatusId, FamilyStatusName, KontaktKoord, Trebov_K_Work, Arhiv FROM BezWorkView WHERE Id = @Id;", new { Id }).FirstOrDefault();
+                model = db.Query<BezWork>("SELECT Id, AnketaId, AnketaName, Stag,  Email, EducationId, EducationName, PositionId, PositionName, Professional, "
+                    + " MestoWork, PrichinaUvoln, FamilyStatusId, FamilyStatusName, KontaktKoord, Trebov_K_Work, Birthday, UserId, Arhiv FROM BezWorkView WHERE Id = @Id;", new { Id }).FirstOrDefault();
             }
 
             return model;
@@ -63,8 +63,8 @@ namespace LabourExchange.CRUD
         {
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                var Query = "UPDATE BezWork SET AnketaId = @AnketaId,  EducationId = @EducationId,  PositionId = @PositionId,  BenefitId = @BenefitId, " 
-                    + " Professional = @Professional, MestoWork = @MestoWork, PrichinaUvoln = @PrichinaUvoln, FamilyStatusId = @FamilyStatusId,  KontaktKoord = @KontaktKoord, Trebov_K_Work = @Trebov_K_Work, Arhiv = @Arhiv WHERE Id = @Id;";
+                var Query = "UPDATE BezWork SET AnketaId = @AnketaId,  EducationId = @EducationId,  PositionId = @PositionId,  Professional = @Professional, MestoWork = @MestoWork,  "
+                    + "  PrichinaUvoln = @PrichinaUvoln, FamilyStatusId = @FamilyStatusId, KontaktKoord = @KontaktKoord, Trebov_K_Work = @Trebov_K_Work, Arhiv = @Arhiv WHERE Id = @Id;";
                 db.Execute(Query, model);
             }
         }
@@ -72,8 +72,8 @@ namespace LabourExchange.CRUD
         {
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                var Query = "INSERT INTO BezWork (AnketaId,  EducationId,  PositionId,  BenefitId,  Professional, MestoWork, PrichinaUvoln, FamilyStatusId,  KontaktKoord, Trebov_K_Work, Arhiv) " 
-                    + " VALUES(@AnketaId,  @EducationId,  @PositionId,  @BenefitId,  @Professional, @MestoWork, @PrichinaUvoln, @FamilyStatusId,  @KontaktKoord, @Trebov_K_Work, @Arhiv); SELECT CAST(SCOPE_IDENTITY() as int)";
+                var Query = "INSERT INTO BezWork (AnketaId,  EducationId,  PositionId, Professional, MestoWork, PrichinaUvoln, FamilyStatusId,  KontaktKoord, Trebov_K_Work, Arhiv) " 
+                    + " VALUES(@AnketaId,  @EducationId,  @PositionId, @Professional, @MestoWork, @PrichinaUvoln, @FamilyStatusId,  @KontaktKoord, @Trebov_K_Work, @Arhiv); SELECT CAST(SCOPE_IDENTITY() as int)";
                 int Id = db.Query<int>(Query, model).FirstOrDefault();
                 model.Id = Id;
             }

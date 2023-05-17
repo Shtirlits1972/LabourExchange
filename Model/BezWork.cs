@@ -18,8 +18,6 @@ namespace LabourExchange.Model
         public string EducationName { get; set; }
         public int PositionId { get; set; }
         public string PositionName { get; set; }
-        public int BenefitId { get; set; }
-        public int BenefitValue { get; set; }
         public string Professional { get; set; }
         public string MestoWork { get; set; }
         public string PrichinaUvoln { get; set; }
@@ -27,6 +25,8 @@ namespace LabourExchange.Model
         public string FamilyStatusName { get; set; }
         public string KontaktKoord { get; set; }
         public string Trebov_K_Work { get; set; }
+        public DateTime Birthday { get; set; }
+        public int UserId { get; set; }
         public bool Arhiv { get; set; }
 
         public override string ToString()

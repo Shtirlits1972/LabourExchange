@@ -44,8 +44,14 @@ namespace LabourExchange.Forms
 
         private void btnFindVacation_Click(object sender, RoutedEventArgs e)
         {
+            FindVacancy();
+        }
+
+        private void FindVacancy()
+        {
+            intCurrentVacation = 0;
             BezWork worker = (BezWork)comboAnketa.SelectedItem;
-            listVacancy = VacancyCrud.GetAll(worker.EducationId, worker.PositionId);
+            listVacancy = VacancyCrud.GetAll(worker.EducationId, worker.PositionId, worker.AnketaId);
 
             if (listVacancy.Count > 0)
             {
@@ -70,7 +76,15 @@ namespace LabourExchange.Forms
                 SetvacancyAttr(vacancy);
             }
         }
-
+        private void btnPrev_Click(object sender, RoutedEventArgs e)
+        {
+            if ((intCurrentVacation - 1) > -1)
+            {
+                intCurrentVacation--;
+                vacancy = listVacancy[intCurrentVacation];
+                SetvacancyAttr(vacancy);
+            }
+        }
         private void SetvacancyAttr(Vacancy vac)
         {
             FirmName.Content = vac.FirmaName;
@@ -78,16 +92,16 @@ namespace LabourExchange.Forms
             Zhilish.Content = vac.EducationName;
             Usloviya.Content = vac.UsloviyWorkOplata;
             Trebovanie.Content = vac.Trebovan;
-        }
 
-        private void btnPrev_Click(object sender, RoutedEventArgs e)
-        {
-            if ((intCurrentVacation - 1) > 0)
+            if(listVacancy.Count == 0)
             {
-                intCurrentVacation--;
-                vacancy = listVacancy[intCurrentVacation];
-                SetvacancyAttr(vacancy);
+                lblNumber.Content = "0";
             }
+            else
+            {
+                lblNumber.Content = intCurrentVacation+1;
+            }
+            lblAllNumber.Content = listVacancy.Count;
         }
 
         private void btnOffer_Click(object sender, RoutedEventArgs e)
@@ -98,6 +112,10 @@ namespace LabourExchange.Forms
 
             vacancy.Priznak = false;
             VacancyCrud.Edit(vacancy);
+
+            VacancyCrud.AddAnketaVacancyLink(vacancy.Id, bezWork.AnketaId);
+
+            FindVacancy();
 
             string fileName = "Направление на работу " + bezWork.AnketaName + " " + DateTime.Now.ToShortDateString();
 
@@ -162,10 +180,10 @@ namespace LabourExchange.Forms
                     package.Save();
 
                 }
+
                 MessageBoxResult result = System.Windows.MessageBox.Show("Отчет сформирован! \r\n Хотите отправить почту?", "Внимание!", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
-
-                if(result == MessageBoxResult.OK)
+                if (result == MessageBoxResult.OK)
                 {
                     string recipient = bezWork.Email;
                     string subject = "Трудоустройство";
@@ -173,6 +191,15 @@ namespace LabourExchange.Forms
                     string attachmentPath = filname;
 
                     Ut.SendEmailWithAttachment(recipient, subject, body, attachmentPath);
+                }
+
+                try
+                {
+                    System.Diagnostics.Process.Start(filname);
+                }
+                catch (Exception ex)
+                {
+
                 }
             }
         }

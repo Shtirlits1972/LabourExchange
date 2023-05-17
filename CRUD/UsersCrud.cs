@@ -19,7 +19,19 @@ namespace LabourExchange.CRUD
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                list = db.Query<Users>("SELECT Id, [Login], [Password], [AnketaId], [Role] FROM Users").ToList();
+                list = db.Query<Users>("SELECT Id, [Login], [Password],  [Role] FROM Users").ToList();
+            }
+
+            return list;
+        }
+
+        public static List<Users> GetUsersWithoutAnkets()
+        {
+            List<Users> list = new List<Users>();
+
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                list = db.Query<Users>(" SELECT Id, [Login], [Password],  [Role] FROM Users WHERE Id NOT IN (SELECT A.UserId FROM Anketa A) AND [Role] = 'user' ; ").ToList();
             }
 
             return list;
@@ -31,7 +43,7 @@ namespace LabourExchange.CRUD
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                model = db.Query<Users>("SELECT TOP 1 Id, [Login], [Password], [AnketaId], [Role] FROM Users WHERE [Login] = @Login AND [Password] = @Password;", new { Login = strLogin, Password  = strPassword }).FirstOrDefault();
+                model = db.Query<Users>("SELECT TOP 1 Id, [Login], [Password],  [Role] FROM Users WHERE [Login] = @Login AND [Password] = @Password;", new { Login = strLogin, Password  = strPassword }).FirstOrDefault();
             }
             return model;
         }
@@ -42,7 +54,7 @@ namespace LabourExchange.CRUD
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                model = db.Query<Users>("SELECT Id, [Login], [Password], [AnketaId], [Role] FROM Users WHERE Id = @Id;", new { Id }).FirstOrDefault();
+                model = db.Query<Users>("SELECT Id, [Login], [Password], [Role] FROM Users WHERE Id = @Id;", new { Id }).FirstOrDefault();
             }
 
             return model;
@@ -58,7 +70,7 @@ namespace LabourExchange.CRUD
         {
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                var Query = "UPDATE Users SET Name = @Name WHERE Id = @Id;";
+                var Query = "UPDATE Users SET [Login] = @Login, [Password] = @Password,  [Role] = @Role WHERE Id = @Id;";
                 db.Execute(Query, model);
             }
         }
@@ -66,7 +78,7 @@ namespace LabourExchange.CRUD
         {
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                var Query = "INSERT INTO Users ([Login], [Password], [AnketaId], [Role]) VALUES(@Login, @Password, @AnketaId, @Role); SELECT CAST(SCOPE_IDENTITY() as int)";
+                var Query = "INSERT INTO Users ([Login], [Password],  [Role]) VALUES(@Login, @Password,  @Role); SELECT CAST(SCOPE_IDENTITY() as int)";
                 int Id = db.Query<int>(Query, model).FirstOrDefault();
                 model.Id = Id;
             }
