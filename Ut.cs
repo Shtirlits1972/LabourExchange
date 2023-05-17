@@ -20,6 +20,7 @@ namespace LabourExchange
 {
     public class Ut
     {
+        int y = 0;
         public static Users currentUser = new Users();
 
         public static readonly string strConn = ConfigurationManager.AppSettings["SqlConnString"];
