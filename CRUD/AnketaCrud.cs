@@ -35,7 +35,7 @@ namespace LabourExchange.CRUD
             {
                 list = db.Query<Anketa>("SELECT Id, Fam, Name, Otch, Pasport, KolYear, Email, Telephone, UserId, Birthday FROM Anketa").ToList();
             }
-                  
+
             return list;
         }
         public static Anketa GetByUserId(int UserId)
@@ -72,7 +72,16 @@ namespace LabourExchange.CRUD
             using (IDbConnection db = new SqlConnection(strConn))
             {
                 var Query = "UPDATE Anketa SET  Fam = @Fam , Name = @Name, Otch = @Otch, Pasport = @Pasport, KolYear = @KolYear, Email = @Email, Telephone = @Telephone, UserId = @UserId, Birthday = @Birthday WHERE Id = @Id;";
-                db.Execute(Query, model);
+
+                try
+                {
+                    db.Execute(Query, model);
+                }
+                catch(Exception ex)
+                {
+                    string Error = ex.Message;
+                }
+               
             }
         }
         public static Anketa Add(Anketa model)
@@ -80,10 +89,119 @@ namespace LabourExchange.CRUD
             using (IDbConnection db = new SqlConnection(strConn))
             {
                 var Query = "INSERT INTO Anketa ( Fam, Name, Otch, Pasport, KolYear, Email, Telephone, UserId, Birthday) VALUES(@Fam, @Name, @Otch, @Pasport, @KolYear, @Email, @Telephone, @UserId, @Birthday); SELECT CAST(SCOPE_IDENTITY() as int)";
-                int Id = db.Query<int>(Query, model).FirstOrDefault();
-                model.Id = Id;
+
+                try
+                {
+                    int Id = db.Query<int>(Query, model).FirstOrDefault();
+                    model.Id = Id;
+                }
+                catch (Exception ex)
+                {
+                    string Error = ex.Message;
+                }
             }
             return model;
         }
+
+        #region check before Update
+        public static bool checkPassportEdit(string Pasport, int Id)
+        {
+            bool flag = false;
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                int q = db.Query<int>(" SELECT COUNT(*)q from Anketa WHERE UPPER(Pasport) = UPPER(@Pasport)  AND Id != @Id ; ", new { Pasport, Id }).FirstOrDefault();
+
+                if (q > 0)
+                {
+                    flag = true;
+                }
+            }
+
+            return flag;
+        }
+
+        public static bool checkTelephoneEdit(string Telephone, int Id)
+        {
+            bool flag = false;
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                int q = db.Query<int>(" SELECT COUNT(*)q from Anketa WHERE UPPER(Telephone) = UPPER(@Telephone)   AND Id != @Id ; ", new { Telephone, Id }).FirstOrDefault();
+
+                if (q > 0)
+                {
+                    flag = true;
+                }
+            }
+
+            return flag;
+        }
+
+        public static bool checkUserIdEdit(int UserId, int Id)
+        {
+            bool flag = false;
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                int q = db.Query<int>(" SELECT COUNT(*)q from Anketa WHERE UserId = @UserId  AND Id != @Id ; ", new { UserId, Id }).FirstOrDefault();
+
+                if (q > 0)
+                {
+                    flag = true;
+                }
+            }
+
+            return flag;
+        }
+        #endregion
+
+        #region check before Insert
+        public static bool checkPassport(string Pasport)
+        {
+            bool flag = false;
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                int q = db.Query<int>(" SELECT COUNT(*)q from Anketa WHERE UPPER(Pasport) = UPPER(@Pasport) ; ", new { Pasport }).FirstOrDefault();
+
+                if (q > 0)
+                {
+                    flag = true;
+                }
+            }
+
+            return flag;
+        }
+
+        public static bool checkTelephone(string Telephone)
+        {
+            bool flag = false;
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                int q = db.Query<int>(" SELECT COUNT(*)q from Anketa WHERE UPPER(Telephone) = UPPER(@Telephone) ; ", new { Telephone }).FirstOrDefault();
+
+                if (q > 0)
+                {
+                    flag = true;
+                }
+            }
+
+            return flag;
+        }
+
+        public static bool checkUserId(int UserId)
+        {
+            bool flag = false;
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                int q = db.Query<int>(" SELECT COUNT(*)q from Anketa WHERE UserId = @UserId ; ", new { UserId }).FirstOrDefault();
+
+                if (q > 0)
+                {
+                    flag = true;
+                }
+            }
+
+            return flag;
+        } 
+        #endregion
+
     }
 }

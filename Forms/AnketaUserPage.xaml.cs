@@ -19,7 +19,7 @@ namespace LabourExchange.Forms
 {
     public partial class AnketaUserPage : Page
     {
-        Anketa model = new Anketa();
+        Anketa model = null;
         public AnketaUserPage()
         {
             InitializeComponent();
@@ -33,6 +33,7 @@ namespace LabourExchange.Forms
 
             if (model == null)
             {
+                model = new Anketa { Id = 0, UserId = Ut.currentUser.Id };
                 return;
             }
             else if (model.Id > 0)
@@ -59,13 +60,11 @@ namespace LabourExchange.Forms
             }
             else
             {
-                model = new Anketa { Id = 0, UserId = Ut.currentUser.Id };
-
                 model.Fam = txtFam.Text;
                 model.Name = txtName.Text;
 
                 model.Otch = txtOtch.Text;
-                model.Pasport = txtPasport.Text;
+                model.Pasport = txtPasport.Text.Replace("_", "").Trim();
 
                 int intKolYear = 0;
                 if (int.TryParse(txtKolYear.Text.Replace("_", "").Trim(), out intKolYear))
@@ -80,10 +79,56 @@ namespace LabourExchange.Forms
 
                 if (model.Id > 0)
                 {
+                    #region checkData
+                    bool userId = AnketaCrud.checkUserIdEdit(model.UserId, model.Id);
+                    if (userId)
+                    {
+                        MessageBox.Show("Анкета с таким пользователем уже существует! \r\nДанные не сохранены", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    bool passport = AnketaCrud.checkPassportEdit(model.Pasport.Trim(), model.Id);
+                    if (passport)
+                    {
+                        MessageBox.Show("Анкета с таким паспортом уже существует! \r\nДанные не сохранены", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    bool phone = AnketaCrud.checkTelephoneEdit(model.Telephone.Trim(), model.Id);
+                    if (phone)
+                    {
+                        MessageBox.Show("Анкета с таким телефоном уже существует! \r\nДанные не сохранены", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
+
                     AnketaCrud.Edit(model);
                 }
                 else
                 {
+                    #region checkData
+                    bool userId = AnketaCrud.checkUserId(model.UserId);
+                    if (userId)
+                    {
+                        MessageBox.Show("Анкета с таким пользователем уже существует! \r\nДанные не сохранены", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    bool passport = AnketaCrud.checkPassport(model.Pasport.Trim());
+                    if (passport)
+                    {
+                        MessageBox.Show("Анкета с таким паспортом уже существует! \r\nДанные не сохранены", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    bool phone = AnketaCrud.checkTelephone(model.Telephone.Trim());
+                    if (phone)
+                    {
+                        MessageBox.Show("Анкета с таким телефоном уже существует! \r\nДанные не сохранены", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
+
                     model = AnketaCrud.Add(model);
                 }
                 MessageBox.Show("Внимание", "Данные сохранены", MessageBoxButton.OK, MessageBoxImage.Information);
