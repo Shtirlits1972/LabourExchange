@@ -7,12 +7,35 @@ using Dapper;
 using System.Data.SqlClient;
 using System.Data;
 using LabourExchange.Model;
+using System.Windows.Documents;
 
 namespace LabourExchange.CRUD
 {
     public class UsersCrud
     {
         public static readonly string strConn = Ut.strConn;
+
+
+        public static bool checkLogin(string strLogin)
+        {
+            bool flag = false;
+
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                int count = db.Query<int>("SELECT COUNT(*)q FROM Users WHERE UPPER([Login]) = UPPER(@strLogin);", new { strLogin }).FirstOrDefault();
+
+                if(count == 0)
+                {
+                    flag = true;
+                }
+                else if(count > 0)
+                {
+                    flag = false;
+                }
+            }
+            return flag;
+        }
+
         public static List<Users> GetAll()
         {
             List<Users> list = new List<Users>();

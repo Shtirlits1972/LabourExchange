@@ -24,11 +24,12 @@ namespace LabourExchange.Model
         public string Trebovan { get; set; }
         public bool Priznak { get; set; }
         public string Sex { get; set; }
+        public int qty { get; set; }
 
         public override string ToString()
         {
             return $"Id = {Id}, FirmaId = {FirmaId}, FirmaName = {FirmaName}, EducationId = {EducationId}, EducationName = {EducationName}, PositionId = {PositionId},  PositionName = {PositionName}, WorkSceduleId = {WorkSceduleId},"
-                +$" WorkSceduleName = {WorkSceduleName}, UsloviyWorkOplata = {UsloviyWorkOplata}, Trebovan = {Trebovan}, Priznak = {Priznak}, Sex = {Sex}";
+                +$" WorkSceduleName = {WorkSceduleName}, UsloviyWorkOplata = {UsloviyWorkOplata}, Trebovan = {Trebovan}, Priznak = {Priznak}, Sex = {Sex}, qty = {qty}";
         }
     }
 }

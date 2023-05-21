@@ -24,7 +24,6 @@ namespace LabourExchange.Forms
         {
             InitializeComponent();
             comboAnketa.ItemsSource = AnketaCrud.GetAll();
-            comboAnketa.SelectedIndex = 0;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -35,6 +34,12 @@ namespace LabourExchange.Forms
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
+            if(comboAnketa.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите анкету", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             model.Deskr = txtDeskr.Text;
 
             int intVal = 0;

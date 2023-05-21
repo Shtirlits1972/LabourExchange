@@ -15,6 +15,18 @@ namespace LabourExchange.CRUD
     public class AnketaCrud
     {
         public static readonly string strConn = Ut.strConn;
+
+        public static List<Anketa> GetAll_ForNew_Bezwork()
+        {
+            List<Anketa> list = new List<Anketa>();
+
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                list = db.Query<Anketa>("SELECT Id, Fam, Name, Otch, Pasport, KolYear, Email, Telephone, UserId, Birthday FROM Anketa   WHERE Id NOT IN ( SELECT DISTINCT B.AnketaId FROM BezWork B ) ; ").ToList();
+            }
+
+            return list;
+        }
         public static List<Anketa> GetAll()
         {
             List<Anketa> list = new List<Anketa>();

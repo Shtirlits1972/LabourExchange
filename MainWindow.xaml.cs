@@ -1,4 +1,5 @@
 ﻿using LabourExchange.Forms;
+using LabourExchange.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Telerik.Windows.Controls;
 
 namespace LabourExchange
 {
@@ -20,6 +22,7 @@ namespace LabourExchange
     {
         public MainWindow()
         {
+            LocalizationManager.Manager = new CustomLocalizationManager();
             InitializeComponent();
         }
 
@@ -29,16 +32,19 @@ namespace LabourExchange
             login.Owner = this;
             login.ShowDialog();
 
-            if(login.IsRegister)
+            if (login.IsRegister)
             {
                 RegisterNewAnketaView registerNew = new RegisterNewAnketaView();
                 registerNew.ShowDialog();
 
-                if(!registerNew.IsReg)
+                if (!registerNew.IsReg)
                 {
                     Close();
                 }
             }
+
+            //Users users = new Users { Id = 1, Login = "admin", Role = "admin" };
+            //Ut.currentUser = users;
 
             MenuExit.Visibility = Visibility.Visible;
 
@@ -96,7 +102,7 @@ namespace LabourExchange
 
         private void AnketaPageBtn_Click(object sender, RoutedEventArgs e)
         {
-            frmContent.NavigationService.Navigate(new Uri("Forms/AnketaPage.xaml", UriKind.Relative));
+            frmContent.NavigationService.Navigate(new Uri("Forms/AnketaPage2.xaml", UriKind.Relative));
             Title = "Анкеты";
         }
 
@@ -146,6 +152,12 @@ namespace LabourExchange
         {
             SendMailParams sendMailParams = new SendMailParams();
             sendMailParams.ShowDialog();
+        }
+
+        private void MenuFindInPage_Click(object sender, RoutedEventArgs e)
+        {
+            frmContent.NavigationService.Navigate(new Uri("Forms/Find_Vacancy_BezWork_Page.xaml", UriKind.Relative));
+            Title = "Поиск";
         }
     }
 }

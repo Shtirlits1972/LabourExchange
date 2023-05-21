@@ -84,7 +84,7 @@
             <DatePicker x:Name="picBirthday"  Width="250" Height="25" HorizontalAlignment="Center"  Grid.Row="7" Margin="5" Grid.Column="1"/>
 
             <TextBlock Text="Пользователь" VerticalAlignment="Center" Grid.Row="8" Margin="5" Grid.Column="0"/>
-            <ComboBox x:Name="comboUsers"   Grid.Column="1" FontSize="15" Grid.Row="8" />
+            <ComboBox x:Name="comboUsers"   Grid.Column="1" FontSize="15" Grid.Row="8" IsEditable="True" Text="Выберите пользователя" />
 
             <Button x:Name="btnCancel" Content="Отменить" Margin="15,10,15,0" Width="140" Height="25" Grid.Row="9" Grid.Column="0" Click="btnCancel_Click"/>
             <Button x:Name="btnOk" Content="Сохранить"  Margin="15,10,15,0" Width="140" Height="25" Grid.Row="9" Grid.Column="1" Click="btnOk_Click"/>

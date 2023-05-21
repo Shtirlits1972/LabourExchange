@@ -56,9 +56,16 @@ namespace LabourExchange.Forms
             educationEdit.ShowDialog();
 
             Education model = educationEdit.model;
-            ObrazovanieList.Add(model);
-            gridMain.Items.Refresh();
 
+            if(model == null)
+            {
+                return;
+            }
+            else
+            {
+                ObrazovanieList.Add(model);
+                gridMain.Items.Refresh();
+            }
         }
 
         private void bEdit_Click(object sender, RoutedEventArgs e)

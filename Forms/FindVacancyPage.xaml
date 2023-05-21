@@ -50,6 +50,7 @@
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Требования" Binding="{Binding Trebovan, Mode=OneWay}"/>
                 <DataGridCheckBoxColumn Header="Актуальна"  Binding="{Binding  Priznak, Mode=OneWay}" />
                 <DataGridTextColumn Foreground="Black" Width="10*" Header="Пол" Binding="{Binding Sex, Mode=OneWay}"/>
+                <DataGridTextColumn Foreground="Black" Width="10*" Header="К-во" Binding="{Binding qty, Mode=OneWay}"/>
             </DataGrid.Columns>
 
         </DataGrid>

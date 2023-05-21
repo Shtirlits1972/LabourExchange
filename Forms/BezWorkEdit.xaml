@@ -29,18 +29,18 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="Анкета" VerticalAlignment="Center" Grid.Row="0" Margin="5" Grid.Column="0"/>
-        <ComboBox x:Name="comboAnketa"   Grid.Column="1" FontSize="15" Grid.Row="0" />
+        <ComboBox x:Name="comboAnketa"   Grid.Column="1" FontSize="15" Grid.Row="0" IsEditable="True" Text="Выберите анкету" />
 
         <TextBlock Text="Образование" VerticalAlignment="Center" Grid.Row="1" Margin="5" Grid.Column="0" />
 
         <DockPanel  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
-            <ComboBox x:Name="comboEducation" Width="340" Margin="0,0,0,0" FontSize="15"   />
+            <ComboBox x:Name="comboEducation" Width="340" Margin="0,0,0,0" FontSize="15"   IsEditable="True" Text="Выберите образование"   />
             <Button Content="+" x:Name="btnAddEducation" Width="40" Margin="5,0,5,0" Click="btnAddEducation_Click"/>
         </DockPanel>
 
         <TextBlock Text="Должность" VerticalAlignment="Center" Grid.Row="2" Margin="5" Grid.Column="0"/>
         <DockPanel  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
-            <ComboBox x:Name="comboPosition"  Width="340"   FontSize="15"  />
+            <ComboBox x:Name="comboPosition"  Width="340"   FontSize="15"   IsEditable="True" Text="Выберите должность"   />
             <Button Content="+" x:Name="btnAddPosition" Width="40" Margin="5,0,5,0" Click="btnAddPosition_Click"/>
         </DockPanel>
 
@@ -57,7 +57,7 @@
 
         <TextBlock Text="Семейное положение" VerticalAlignment="Center" Grid.Row="6" Margin="5" Grid.Column="0"/>
         <DockPanel  Grid.Row="6"  Grid.Column="1" HorizontalAlignment="Left">
-            <ComboBox x:Name="comboFamilyStatus" Width="340"  FontSize="15"  />
+            <ComboBox x:Name="comboFamilyStatus" Width="340"  FontSize="15"   IsEditable="True" Text="Выберите семейное положение"   />
             <Button Content="+" x:Name="btnFamilyStatus" Width="40" Margin="5,0,5,0" Click="btnFamilyStatus_Click"/>
         </DockPanel>
 

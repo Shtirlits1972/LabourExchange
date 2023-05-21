@@ -56,10 +56,13 @@ namespace LabourExchange.Forms
             FamilyStatusEdit.ShowDialog();
 
             FamilyStatus model = FamilyStatusEdit.model;
-            FamilyStatusList.Add(model);
-            gridMain.ItemsSource = FamilyStatusList;
-            gridMain.Items.Refresh();
 
+            if (model != null)
+            {
+                FamilyStatusList.Add(model);
+                gridMain.ItemsSource = FamilyStatusList;
+                gridMain.Items.Refresh();
+            }
         }
 
         private void bEdit_Click(object sender, RoutedEventArgs e)

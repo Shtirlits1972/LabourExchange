@@ -23,10 +23,12 @@
     <Grid>
         <StackPanel Margin="10">
             <TextBox x:Name="txtLogin" 
+
                              materialDesign:HintAssist.Hint="Укажите логин"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
             <TextBox x:Name="txtPassword" 
+ 
                              materialDesign:HintAssist.Hint="Укажите пароль"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
@@ -38,6 +40,7 @@
                 <Button Margin="75,0,0,0"
                         IsDefault="True"
                         x:Name="btnEnter"
+                        Focusable="True"
                         Click="btnEnter_Click"
                         Content="Вход">
                 </Button>

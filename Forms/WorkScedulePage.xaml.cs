@@ -58,9 +58,13 @@ namespace LabourExchange.Forms
                 WorkSceduleEdit.ShowDialog();
 
                 WorkScedule model = WorkSceduleEdit.model;
-                WorkSceduleList.Add(model);
-                gridMain.ItemsSource = WorkSceduleList;
-                gridMain.Items.Refresh();
+
+                if (model != null)
+                {
+                    WorkSceduleList.Add(model);
+                    gridMain.ItemsSource = WorkSceduleList;
+                    gridMain.Items.Refresh();
+                }
             }
             catch (Exception ex)
             {

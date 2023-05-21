@@ -32,11 +32,16 @@ namespace LabourExchange.Forms
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            bool LoginIsFree = UsersCrud.checkLogin(txtLogin.Text.Trim());
+
+            if(!LoginIsFree)
+            {
+                MessageBox.Show("Выберите другой логин для регистрации!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             Users users = new Users { Id = 0,  Login = txtLogin.Text, Password = txtPassword.Text, Role = "user" };
             Ut.currentUser = UsersCrud.Add(users);
-
-            //Anketa anketa = new Anketa { Id = 0, Email = "", Fam = "", Name = "", Otch = "", Pasport = "", Telephone = "", KolYear = 0, UserId = users.Id };
-            //anketa = AnketaCrud.Add(anketa);
 
             IsReg = true;
 
@@ -47,23 +52,5 @@ namespace LabourExchange.Forms
         {
             Close();
         }
-
-        //private void txtStage_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    int Stag = 0;
-        //    bool flag = int.TryParse(txtStage.Text.Trim(), out Stag);
-
-        //    if (!flag)
-        //    {
-        //        txtStage.Text = "";
-        //    }
-        //    else
-        //    {
-        //        if ((Stag < 0) || (Stag > 50))
-        //        {
-        //            txtStage.Text = "";
-        //        }
-        //    }
-        //}
     }
 }

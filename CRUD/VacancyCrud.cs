@@ -20,7 +20,7 @@ namespace LabourExchange.CRUD
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                list = db.Query<Vacancy>("SELECT Id, FirmaId, FirmaName, EducationId, EducationName, PositionId, PositionName, WorkSceduleId, WorkSceduleName, UsloviyWorkOplata, Trebovan, Priznak, Sex FROM VacancyView ").ToList();
+                list = db.Query<Vacancy>("SELECT Id, FirmaId, FirmaName, EducationId, EducationName, PositionId, PositionName, WorkSceduleId, WorkSceduleName, UsloviyWorkOplata, Trebovan, Priznak, Sex, qty FROM VacancyView ").ToList();
             }
 
             return list;
@@ -32,8 +32,8 @@ namespace LabourExchange.CRUD
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                list = db.Query<Vacancy>("SELECT Id, FirmaId, FirmaName, EducationId, EducationName, PositionId, PositionName, WorkSceduleId, WorkSceduleName, UsloviyWorkOplata, Trebovan, Priznak, Sex FROM VacancyView WHERE (EducationId = @EducationId) AND (PositionId = @PositionId) "
-                    + " AND Id NOT IN ( SELECT VacancyId FROM AnketaVacancyLink WHERE AnketaId = @AnketaId ) ; ", new { EducationId, PositionId, AnketaId }).ToList();
+                list = db.Query<Vacancy>("SELECT Id, FirmaId, FirmaName, EducationId, EducationName, PositionId, PositionName, WorkSceduleId, WorkSceduleName, UsloviyWorkOplata, Trebovan, Priznak, Sex, qty FROM VacancyView WHERE (EducationId = @EducationId) AND (PositionId = @PositionId) "
+                    + " AND Id NOT IN ( SELECT VacancyId FROM AnketaVacancyLink WHERE AnketaId = @AnketaId )  AND qty > 0  ; ", new { EducationId, PositionId, AnketaId }).ToList();
             }
 
             return list;
@@ -45,7 +45,7 @@ namespace LabourExchange.CRUD
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                list = db.Query<Vacancy>("SELECT Id, FirmaId, FirmaName, EducationId, EducationName, PositionId, PositionName, WorkSceduleId, WorkSceduleName, UsloviyWorkOplata, Trebovan, Priznak, Sex FROM VacancyView WHERE ((EducationId = @EducationId) OR (@EducationId = 0)) AND (Sex = @Sex OR (@Sex = 'Все'));", new { EducationId, Sex }).ToList();
+                list = db.Query<Vacancy>("SELECT Id, FirmaId, FirmaName, EducationId, EducationName, PositionId, PositionName, WorkSceduleId, WorkSceduleName, UsloviyWorkOplata, Trebovan, Priznak, Sex, qty FROM VacancyView WHERE ((EducationId = @EducationId) OR (@EducationId = 0)) AND (Sex = @Sex OR (@Sex = 'Все'));", new { EducationId, Sex }).ToList();
             }
 
             return list;
@@ -56,7 +56,7 @@ namespace LabourExchange.CRUD
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                model = db.Query<Vacancy>("SELECT Id,  FirmaId, FirmaName, EducationId, EducationName, PositionId, PositionName, WorkSceduleId, WorkSceduleName, UsloviyWorkOplata, Trebovan, Priznak, Sex FROM VacancyView WHERE Id = @Id;", new { Id }).FirstOrDefault();
+                model = db.Query<Vacancy>("SELECT Id,  FirmaId, FirmaName, EducationId, EducationName, PositionId, PositionName, WorkSceduleId, WorkSceduleName, UsloviyWorkOplata, Trebovan, Priznak, Sex, qty FROM VacancyView WHERE Id = @Id;", new { Id }).FirstOrDefault();
             }
 
             return model;
@@ -72,7 +72,7 @@ namespace LabourExchange.CRUD
         {
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                var Query = "UPDATE Vacancy SET FirmaId = @FirmaId, EducationId = @EducationId, PositionId = @PositionId, WorkSceduleId = @WorkSceduleId, UsloviyWorkOplata = @UsloviyWorkOplata, Trebovan = @Trebovan, Priznak = @Priznak, Sex = @Sex WHERE Id = @Id;";
+                var Query = "UPDATE Vacancy SET FirmaId = @FirmaId, EducationId = @EducationId, PositionId = @PositionId, WorkSceduleId = @WorkSceduleId, UsloviyWorkOplata = @UsloviyWorkOplata, Trebovan = @Trebovan, Priznak = @Priznak, Sex = @Sex, qty = @qty WHERE Id = @Id;";
                 db.Execute(Query, model);
             }
         }
@@ -80,7 +80,7 @@ namespace LabourExchange.CRUD
         {
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                var Query = "INSERT INTO Vacancy ( FirmaId, EducationId, PositionId, WorkSceduleId, UsloviyWorkOplata, Trebovan, Priznak, Sex ) VALUES(@FirmaId, @EducationId, @PositionId, @WorkSceduleId, @UsloviyWorkOplata, @Trebovan, @Priznak, @Sex); SELECT CAST(SCOPE_IDENTITY() as int )";
+                var Query = "INSERT INTO Vacancy ( FirmaId, EducationId, PositionId, WorkSceduleId, UsloviyWorkOplata, Trebovan, Priznak, Sex, qty ) VALUES(@FirmaId, @EducationId, @PositionId, @WorkSceduleId, @UsloviyWorkOplata, @Trebovan, @Priznak, @Sex, @qty ); SELECT CAST(SCOPE_IDENTITY() as int )";
                 int Id = db.Query<int>(Query, model).FirstOrDefault();
                 model.Id = Id;
             }

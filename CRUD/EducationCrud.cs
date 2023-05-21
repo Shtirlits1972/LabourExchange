@@ -13,6 +13,27 @@ namespace LabourExchange.CRUD
     public class EducationCrud
     {
         public static readonly string strConn = Ut.strConn;
+
+        public static bool NameIsFree(string Name)
+        {
+            bool flag = false;
+
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                int count = db.Query<int>(" SELECT COUNT(*)q FROM Education WHERE UPPER([Name]) = UPPER(@Name) ; ", new { Name }).FirstOrDefault();
+
+                if (count == 0)
+                {
+                    flag = true;
+                }
+                else if (count > 0)
+                {
+                    flag = false;
+                }
+                return flag;
+            }
+        }
+
         public static List<Education> GetAll()
         {
             List<Education> list = new List<Education>();

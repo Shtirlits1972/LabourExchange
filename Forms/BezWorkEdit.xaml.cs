@@ -24,17 +24,12 @@ namespace LabourExchange.Forms
         public BezWorkEdit()
         {
             InitializeComponent();
-            comboAnketa.ItemsSource = AnketaCrud.GetAll();
-            comboAnketa.SelectedIndex = 0;
 
+            comboAnketa.ItemsSource = AnketaCrud.GetAll_ForNew_Bezwork();
             comboEducation.ItemsSource = EducationCrud.GetAll();
-            comboEducation.SelectedIndex = 0;
-
             comboPosition.ItemsSource = PositionCrud.GetAll();
-            comboPosition.SelectedIndex = 0;
-
             comboFamilyStatus.ItemsSource = FamilyStatusCrud.GetAll();
-            comboFamilyStatus.SelectedIndex = 0;
+
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +38,38 @@ namespace LabourExchange.Forms
         }
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
+            bool flag = true;
+            string Error = string.Empty;
+
+            if(comboAnketa.SelectedItem == null)
+            {
+                flag = false;
+                Error += "Выберите анкету\r\n";
+            }
+
+            if(comboEducation.SelectedItem == null)
+            {
+                flag = false;
+                Error += "Выберите образование\r\n";
+            }
+            if (comboPosition.SelectedItem == null)
+            {
+                flag = false;
+                Error += "Выберите должность\r\n";
+            }
+
+            if (comboFamilyStatus.SelectedItem == null)
+            {
+                flag = false;
+                Error += "Выберите семейное положение\r\n";
+            }
+
+            if(!flag)
+            {
+                MessageBox.Show(Error, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             model.AnketaId = ((Anketa)comboAnketa.SelectedItem).Id;
             model.AnketaName = ((Anketa)comboAnketa.SelectedItem).Name;
 

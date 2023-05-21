@@ -35,6 +35,14 @@ namespace LabourExchange.Forms
         {
             model.Name = txtName.Text;
 
+            bool isFree = WorkSceduleCrud.NameIsFree(txtName.Text);
+
+            if (!isFree)
+            {
+                MessageBox.Show("Такое название уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             int intDuration = 0;
 
             if(int.TryParse(txtDuration.Text.Replace("_","").Trim(), out intDuration))

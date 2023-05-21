@@ -26,7 +26,7 @@
         <StackPanel Margin="20"  >
             
             <TextBox x:Name="txtLogin"                              
-                             materialDesign:HintAssist.Hint="Укажите логин"
+                             materialDesign:HintAssist.Hint="Укажите логин" 
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
             <TextBox x:Name="txtPassword"                              

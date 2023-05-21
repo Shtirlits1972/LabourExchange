@@ -35,6 +35,12 @@ namespace LabourExchange.Forms
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
+            if (comboUsers.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите пользователя", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Exclamation); 
+                return;
+            }
+
             model.Birthday = (DateTime)picBirthday.SelectedDate;
             model.Birthday = (DateTime)picBirthday.DisplayDate;
 
@@ -54,7 +60,7 @@ namespace LabourExchange.Forms
             model.Telephone = txtTelephone.Text;
             model.UserId = ((Users)comboUsers.SelectedItem).Id;
 
-            if(!Ut.IsMoreThen16((DateTime)picBirthday.SelectedDate))
+            if (!Ut.IsMoreThen16((DateTime)picBirthday.SelectedDate))
             {
                 MessageBox.Show("Соискателю не может быть менее 16 лет!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }

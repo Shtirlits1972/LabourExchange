@@ -30,6 +30,7 @@ namespace LabourExchange.Forms
             comboEducation.ItemsSource = EducationCrud.GetAll();
             comboPosition.ItemsSource = PositionCrud.GetAll();
             comboWorkScedule.ItemsSource = WorkSceduleCrud.GetAll();
+
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -39,42 +40,82 @@ namespace LabourExchange.Forms
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
+            bool IsReady = true;
+            string Error = string.Empty;
+
             model.UsloviyWorkOplata = txtUsloviyWorkOplata.Text;
             model.Trebovan = txtTrebovan.Text;
             model.Priznak = (bool)checkPriznak.IsChecked;
 
-            model.FirmaId = ((Firma)comboFirma.SelectedItem).Id;
-            model.FirmaName = ((Firma)comboFirma.SelectedItem).Name;
+            int intQty = 0;
+            int.TryParse(txtQty.Text, out intQty);
+            model.qty = intQty;
 
-            model.EducationId = ((Education)comboEducation.SelectedItem).Id;
-            model.EducationName = ((Education)comboEducation.SelectedItem).Name;
-
-            model.PositionId = ((Position)comboPosition.SelectedItem).Id;
-            model.PositionName = ((Position)comboPosition.SelectedItem).Name;
-
-            model.WorkSceduleId = ((WorkScedule)comboWorkScedule.SelectedItem).Id;
-            model.WorkSceduleName = ((WorkScedule) comboWorkScedule.SelectedItem).Name;
-
-            model.Sex = ((string)comboSex.SelectedItem);
-
-            if (IsEdit)
+            if (comboFirma.SelectedItem == null)
             {
-                VacancyCrud.Edit(model);
+                IsReady = false;
+                Error += "Выберите фирму \r\n";
+            }
+
+            if (comboEducation.SelectedItem == null)
+            {
+                IsReady = false;
+                Error += "Выберите образование \r\n";
+            }
+
+            if (comboPosition.SelectedItem == null)
+            {
+                IsReady = false;
+                Error += "Выберите должность \r\n";
+            }
+
+            if (comboSex.SelectedItem == null)
+            {
+                IsReady = false;
+                Error += "Выберите пол \r\n";
+            }
+
+            if (comboWorkScedule.SelectedItem == null)
+            {
+                IsReady = false;
+                Error += "Выберите график \r\n";
+            }
+
+            if (IsReady)
+            {
+                model.FirmaId = ((Firma)comboFirma.SelectedItem).Id;
+                model.FirmaName = ((Firma)comboFirma.SelectedItem).Name;
+
+                model.EducationId = ((Education)comboEducation.SelectedItem).Id;
+                model.EducationName = ((Education)comboEducation.SelectedItem).Name;
+
+                model.PositionId = ((Position)comboPosition.SelectedItem).Id;
+                model.PositionName = ((Position)comboPosition.SelectedItem).Name;
+
+                model.WorkSceduleId = ((WorkScedule)comboWorkScedule.SelectedItem).Id;
+                model.WorkSceduleName = ((WorkScedule)comboWorkScedule.SelectedItem).Name;
+
+                model.Sex = ((string)comboSex.SelectedItem);
+
+                if (IsEdit)
+                {
+                    VacancyCrud.Edit(model);
+                }
+                else
+                {
+                    model = VacancyCrud.Add(model);
+                }
+                Close();
             }
             else
             {
-                model = VacancyCrud.Add(model);
+                MessageBox.Show(Error, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            Close();
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            comboSex.SelectedIndex = 0;
-            comboFirma.SelectedIndex = 0;
-            comboEducation.SelectedIndex = 0;
-            comboPosition.SelectedIndex = 0;
-            comboWorkScedule.SelectedIndex = 0;
             checkPriznak.IsChecked = false;
 
             if (IsEdit)
@@ -82,6 +123,7 @@ namespace LabourExchange.Forms
                 txtUsloviyWorkOplata.Text = model.UsloviyWorkOplata;
                 txtTrebovan.Text = model.Trebovan;
                 checkPriznak.IsChecked = model.Priznak;
+                txtQty.Text = model.qty.ToString();
 
                 #region sex
                 for (int i = 0; i < comboSex.Items.Count; i++)

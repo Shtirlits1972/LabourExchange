@@ -56,10 +56,13 @@ namespace LabourExchange.Forms
             PositionEdit.ShowDialog();
 
             Position model = PositionEdit.model;
-            PositionList.Add(model);
-            gridMain.ItemsSource = PositionList;
-            gridMain.Items.Refresh();
 
+            if(model != null)
+            {
+                PositionList.Add(model);
+                gridMain.ItemsSource = PositionList;
+                gridMain.Items.Refresh();
+            }
         }
 
         private void bEdit_Click(object sender, RoutedEventArgs e)

@@ -34,6 +34,15 @@ namespace LabourExchange.Forms
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
             model.Name = txtName.Text;
+
+            bool isFree = FirmaCrud.NameIsFree(txtName.Text);
+
+            if (!isFree)
+            {
+                MessageBox.Show("Такое название уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             if (IsEdit)
             {
                 FirmaCrud.Edit(model);

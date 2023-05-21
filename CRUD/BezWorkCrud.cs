@@ -7,6 +7,7 @@ using Dapper;
 using System.Data.SqlClient;
 using System.Data;
 using LabourExchange.Model;
+using System.Windows;
 
 namespace LabourExchange.CRUD
 {
@@ -74,8 +75,17 @@ namespace LabourExchange.CRUD
             {
                 var Query = "INSERT INTO BezWork (AnketaId,  EducationId,  PositionId, Professional, MestoWork, PrichinaUvoln, FamilyStatusId,  KontaktKoord, Trebov_K_Work, Arhiv) " 
                     + " VALUES(@AnketaId,  @EducationId,  @PositionId, @Professional, @MestoWork, @PrichinaUvoln, @FamilyStatusId,  @KontaktKoord, @Trebov_K_Work, @Arhiv); SELECT CAST(SCOPE_IDENTITY() as int)";
-                int Id = db.Query<int>(Query, model).FirstOrDefault();
-                model.Id = Id;
+
+                try
+                {
+                    int Id = db.Query<int>(Query, model).FirstOrDefault();
+                    model.Id = Id;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
             }
             return model;
         }

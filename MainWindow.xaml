@@ -99,14 +99,14 @@
                     </MenuItem>
                 </MenuItem>
 
-                <MenuItem Header="Поиск" Padding="10,0,10,15"  Visibility="Collapsed" x:Name="MenuFindInPage" >
+                <MenuItem Header="Поиск" Padding="10,0,10,15"  Visibility="Collapsed" x:Name="MenuFindInPage" Click="MenuFindInPage_Click" >
                     <MenuItem.Icon>
                         <StackPanel>
                             <materialDesign:PackIcon Kind="FindInPage" />
                         </StackPanel>
                     </MenuItem.Icon>
 
-                    <MenuItem Header="Вакансии" x:Name="MenuFindVacansia"  Click="MenuFindVacansia_Click">
+                    <!--<MenuItem Header="Вакансии" x:Name="MenuFindVacansia"  Click="MenuFindVacansia_Click">
                         <MenuItem.Icon>
                             <StackPanel>
                                 <Image Width="20" Height="20" />
@@ -119,7 +119,7 @@
                                 <Image Width="20" Height="20"/>
                             </StackPanel>
                         </MenuItem.Icon>
-                    </MenuItem>
+                    </MenuItem>-->
                 </MenuItem>
 
                 <MenuItem Header="Трудоустройство" x:Name="MenuEmployment" Click="MenuEmployment_Click" Padding="10,0,10,15"  Visibility="Collapsed" >

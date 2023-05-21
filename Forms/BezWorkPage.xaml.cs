@@ -51,6 +51,14 @@ namespace LabourExchange.Forms
 
         private void bAdd_Click(object sender, RoutedEventArgs e)
         {
+            List<Anketa> listAnketa = AnketaCrud.GetAll_ForNew_Bezwork();
+
+            if(listAnketa == null || listAnketa.Count == 0)
+            {
+                MessageBox.Show("Нет новых анкет", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Stop);
+                return;
+            }
+
             BezWorkEdit BezWorkEdit = new BezWorkEdit();
             BezWorkEdit.IsEdit = false;
             BezWorkEdit.ShowDialog();

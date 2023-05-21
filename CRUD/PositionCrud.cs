@@ -13,6 +13,25 @@ namespace LabourExchange.CRUD
     public class PositionCrud
     {
         public static readonly string strConn = Ut.strConn;
+        public static bool NameIsFree(string Name)
+        {
+            bool flag = false;
+
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                int count = db.Query<int>(" SELECT COUNT(*)q FROM Position WHERE UPPER([Name]) = UPPER(@Name); ", new { Name }).FirstOrDefault();
+
+                if (count == 0)
+                {
+                    flag = true;
+                }
+                else if (count > 0)
+                {
+                    flag = false;
+                }
+                return flag;
+            }
+        }
         public static List<Position> GetAll()
         {
             List<Position> list = new List<Position>();

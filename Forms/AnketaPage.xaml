@@ -88,7 +88,6 @@
         </DockPanel>
 
         <DataGrid x:Name="gridMain" Grid.Row="1" 
-                 
             CanUserAddRows="False"
                   AutoGenerateColumns="False">
 

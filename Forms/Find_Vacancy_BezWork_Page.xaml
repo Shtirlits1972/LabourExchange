@@ -1,0 +1,197 @@
+﻿<Page x:Class="LabourExchange.Forms.Find_Vacancy_BezWork_Page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      
+      xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+      xmlns:xct="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      
+      
+      xmlns:local="clr-namespace:LabourExchange.Forms"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Find_Vacancy_BezWork_Page">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <TextBlock FontSize="16"  Margin="20,0,0,0">Вакансии</TextBlock>
+
+            <Button x:Name="btnClearFilterVacancy"
+            Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+            ToolTip="Очистить фильтры"
+            Click="btnClearFilterVacancy_Click"
+                Margin="15,0,15,0" Cursor="Hand">
+                <materialDesign:PackIcon
+                Kind="Filter"
+                Height="24"
+                Width="24" />
+            </Button>
+            
+        </DockPanel>
+
+        <DockPanel  Grid.Row="1" >
+           
+                <telerik:RadGridView x:Name ="vacancyGrid"                
+                             Grid.Row="1"
+                             IsReadOnly="True"
+                             NewRowPosition="None" 
+                                     Margin="5,5,5,5"
+                                     GroupRenderMode="Flat" 
+                                     ShowGroupPanel="False"
+                                     CanUserInsertRows="False"
+                                     ShowSearchPanel="False" 
+                                     AlternateRowBackground="Aquamarine" AlternationCount="2"  SelectionMode="Single"
+                                     AutoGenerateColumns="False">
+                <telerik:RadGridView.Columns>
+
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Id}"  
+                                    IsVisible="False"
+                                    HeaderTextAlignment="Center"
+                                    IsReadOnly="True"
+                                    OptimizeDistinctFilterQuery="False"
+                                    TextAlignment="Center"
+                                    Header="ИД"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding FirmaName}"
+                                    Header="Фирма"
+                                    HeaderTextAlignment="Center"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding EducationName}"
+                                    Header="Образование"
+                                    HeaderTextAlignment="Center"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding PositionName}"
+                                    Header="Должность"
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding WorkSceduleName}"
+                                    Header="График"
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding UsloviyWorkOplata}"
+                                    Header="Оплата"
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding Trebovan}"
+                                    Header="Требования"
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding Priznak}"
+                                    Header="Актуальна"
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding Sex}"
+                                    Header="Пол"
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding qty}"
+                                    Header="К-во"
+                                    HeaderTextAlignment="Center"/>
+                    
+                </telerik:RadGridView.Columns>
+
+
+            </telerik:RadGridView >
+        
+        </DockPanel>
+        
+        <!--<GridSplitter Grid.Row="1" ShowsPreview="False" Width="3" 
+        HorizontalAlignment="Stretch"    VerticalAlignment="Center" />-->
+
+        <DockPanel Grid.Row="2" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <TextBlock FontSize="16">Безработные</TextBlock>
+            <Button x:Name="btnClearFilterBezWork"
+            Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+            ToolTip="Очистить фильтры"
+            Click="btnClearFilterBezWork_Click"
+                Margin="15,0,15,0" Cursor="Hand">
+                <materialDesign:PackIcon
+                Kind="Filter"
+                Height="24"
+                Width="24" />
+            </Button>
+        </DockPanel>
+
+        <DockPanel  Grid.Row="3" >
+            <telerik:RadGridView x:Name ="bezWorkGrid"                
+                             Grid.Row="1"
+                             IsReadOnly="True"
+                             NewRowPosition="None" 
+                                     Margin="5,5,5,5"
+                                     GroupRenderMode="Flat" 
+                                     ShowGroupPanel="False"
+                                     CanUserInsertRows="False"
+                                     ShowSearchPanel="False" 
+                                     AlternateRowBackground="Aquamarine" AlternationCount="2"  SelectionMode="Single"
+                                     AutoGenerateColumns="False">
+                <telerik:RadGridView.Columns>
+
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Id}"  
+                                    IsVisible="False"
+                                    HeaderTextAlignment="Center"
+                                    IsReadOnly="True"
+                                    OptimizeDistinctFilterQuery="False"
+                                    TextAlignment="Center"
+                                    Header="ИД"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding AnketaName}"
+                                    Header="Анкета"
+                                    HeaderTextAlignment="Center"/>
+                    
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding EducationName}"
+                                    Header="Образование"
+                                    HeaderTextAlignment="Center"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding PositionName}"
+                                    Header="Должность"
+                                    HeaderTextAlignment="Center"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BenefitValue}"
+                                    Header="Пособие"
+                                    HeaderTextAlignment="Center"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Professional}"
+                                    Header="Профессия"
+                                    HeaderTextAlignment="Center"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding MestoWork}"
+                                    Header="Место работы"
+                                    HeaderTextAlignment="Center"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding PrichinaUvoln}"
+                                    Header="Причина увольнения"
+                                    HeaderTextAlignment="Center"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding FamilyStatusName}"
+                                    Header="Семейное положение"
+                                    HeaderTextAlignment="Center"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding KontaktKoord}"
+                                    Header="Контакты"
+                                    HeaderTextAlignment="Center"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Trebov_K_Work}"
+                                    Header="Требования"
+                                    HeaderTextAlignment="Center"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Arhiv}"
+                                    Header="Архив"
+                                    HeaderTextAlignment="Center"/>
+
+                </telerik:RadGridView.Columns>
+
+
+            </telerik:RadGridView >
+        </DockPanel>
+    </Grid>
+</Page>

@@ -4,12 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LabourExchange.Forms"
+                xmlns:xct="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
-        Title="Вакансия" Height="450" Width="800">
+        Title="Вакансия" Height="500" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
@@ -29,47 +32,55 @@
         <TextBlock Text="Фирма" VerticalAlignment="Center" Grid.Row="0" Margin="5" Grid.Column="0"/>
 
         <DockPanel  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">
-            <ComboBox x:Name="comboFirma"  Width="340" Margin="0,0,0,0"  FontSize="15"  />
+            <ComboBox x:Name="comboFirma"  Width="340" Margin="0,0,0,0"  FontSize="15"  Text="Выберите фирму"  IsEditable="True"  />
             <Button Content="+" x:Name="btnAddFirm" Width="40" Margin="5,0,5,0" Click="btnAddFirm_Click"/>
         </DockPanel>
 
         <TextBlock Text="Образование" VerticalAlignment="Center" Grid.Row="1" Margin="5" Grid.Column="0"/>
 
         <DockPanel  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
-            <ComboBox x:Name="comboEducation" Width="340" Margin="0,0,0,0" FontSize="15"   />
+            <ComboBox x:Name="comboEducation" Width="340" Margin="0,0,0,0" FontSize="15" Text="Выберите образование"  IsEditable="True"  />
             <Button Content="+" x:Name="btnAddEducation" Width="40" Margin="5,0,5,0" Click="btnAddEducation_Click"/>
         </DockPanel>
 
-        
+
         <TextBlock Text="Должность" VerticalAlignment="Center" Grid.Row="2" Margin="5" Grid.Column="0"/>
 
         <DockPanel  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
-            <ComboBox x:Name="comboPosition"  Width="340"   FontSize="15"  />
+            <ComboBox x:Name="comboPosition"  Width="340"   FontSize="15"   Text="Выберите должность"  IsEditable="True"   />
             <Button Content="+" x:Name="btnAddPosition" Width="40" Margin="5,0,5,0" Click="btnAddPosition_Click"/>
         </DockPanel>
-        
-        
+
+
         <TextBlock Text="График" VerticalAlignment="Center" Grid.Row="3" Margin="5" Grid.Column="0"/>
 
         <DockPanel  Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left">
-            <ComboBox x:Name="comboWorkScedule"  Width="340" Margin="0,0,0,0"   Grid.Column="1" FontSize="15" Grid.Row="3" />
+            <ComboBox x:Name="comboWorkScedule"  Width="340" Margin="0,0,0,0"   Grid.Column="1" FontSize="15" Grid.Row="3"   Text="Выберите график"  IsEditable="True"  />
             <Button Content="+" x:Name="btnAddWorkScedule" Width="40" Margin="5,0,5,0" Click="btnAddWorkScedule_Click"/>
         </DockPanel>
 
         <TextBlock Text="Оплата" VerticalAlignment="Center" Grid.Row="4" Margin="5" Grid.Column="0"/>
         <TextBox x:Name="txtUsloviyWorkOplata"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="4" Grid.Column="1"/>
-        
+
         <TextBlock Text="Требования" VerticalAlignment="Center" Grid.Row="5" Margin="5" Grid.Column="0"/>
         <TextBox x:Name="txtTrebovan"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="5" Grid.Column="1"/>
-        
+
         <TextBlock Text="Актуальна" VerticalAlignment="Center" Grid.Row="6" Margin="5" Grid.Column="0"/>
         <CheckBox x:Name="checkPriznak"  IsChecked="False" Height="20" Width="20"   Grid.Row="6" Margin="20,0,20,0" Grid.Column="1" />
-        
+
         <TextBlock Text="Пол" VerticalAlignment="Center" Grid.Row="7" Margin="5" Grid.Column="0"/>
-        <ComboBox x:Name="comboSex"   Grid.Column="1" FontSize="15" Grid.Row="7" />
+        <ComboBox x:Name="comboSex"   Grid.Column="1" FontSize="15" Grid.Row="7"   Text="Выберите пол"  IsEditable="True"  />
+
+        <TextBlock Text="Количество" VerticalAlignment="Center" Grid.Row="8" Margin="5" Grid.Column="0"/>
+        <xct:MaskedTextBox 
+                x:Name="txtQty" 
+                             Mask="00"
+            HorizontalContentAlignment="Center"
+            Width="50"
+                             Grid.Row="8" Grid.Column="1"  />
 
 
-        <Button x:Name="btnCancel" Content="Отменить" Width="140" Height="25" Grid.Row="8" Grid.Column="0" Click="btnCancel_Click"/>
-        <Button x:Name="btnOk" Content="Сохранить" Width="140" Height="25" Grid.Row="8" Grid.Column="1" Click="btnOk_Click"/>
+        <Button x:Name="btnCancel" Content="Отменить" Width="140" Height="25" Grid.Row="9" Grid.Column="0" Click="btnCancel_Click"/>
+        <Button x:Name="btnOk" Content="Сохранить" Width="140" Height="25" Grid.Row="9" Grid.Column="1" Click="btnOk_Click"/>
     </Grid>
 </Window>

@@ -110,7 +110,9 @@ namespace LabourExchange.Forms
             bezWork.Arhiv = true;
             BezWorkCrud.Edit(bezWork);
 
+            vacancy.qty--;
             vacancy.Priznak = false;
+
             VacancyCrud.Edit(vacancy);
 
             VacancyCrud.AddAnketaVacancyLink(vacancy.Id, bezWork.AnketaId);
