@@ -34,7 +34,7 @@ namespace LabourExchange.Forms
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            if(comboAnketa.SelectedItem == null)
+            if (comboAnketa.SelectedItem == null)
             {
                 MessageBox.Show("Выберите анкету", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -92,8 +92,10 @@ namespace LabourExchange.Forms
             }
             else
             {
-                picData_Vyplaty.SelectedDate = DateTime.Now;
-                picData_Vyplaty.DisplayDate = DateTime.Now;
+                DateTime dateTime = DateTime.Now.AddDays(30);
+
+                picData_Vyplaty.SelectedDate = dateTime;
+                picData_Vyplaty.DisplayDate = dateTime;
 
                 picData_Postanovki.SelectedDate = DateTime.Now;
                 picData_Postanovki.DisplayDate = DateTime.Now;
@@ -106,40 +108,40 @@ namespace LabourExchange.Forms
             int intValue = 0;
 
             DateTime dateTime = DateTime.Now;
-            if (dateTime.AddYears(-64) > anketa.Birthday)
+
+            if (anketa.KolYear < 3)
             {
-                intValue = 5500;
+                intValue = 1500;
             }
-            else
+            else if (anketa.KolYear >= 3 && anketa.KolYear < 6)
             {
-                if(anketa.KolYear <= 3)
-                {
-                    intValue = 1500;
-                }
-                else if(anketa.KolYear >=3 && anketa.KolYear <=6)
-                {
-                    intValue = 3000;
-                }
+                intValue = 3000;
+            }
+
+            else if (anketa.KolYear >= 6 && anketa.KolYear < 8)
+            {
+                intValue = 5000;
+            }
+            else if (anketa.KolYear >= 8 && anketa.KolYear < 11)
+            {
+                intValue = 7000;
+            }
+            else if (anketa.KolYear >= 11 && anketa.KolYear < 15)
+            {
+                intValue = 9000;
+            }
+            else if (anketa.KolYear >= 15)
+            {
+                intValue = 12000;
+            }
 
 
-                else if (anketa.KolYear >= 6 && anketa.KolYear <= 8)
-                {
-                    intValue = 5000;
-                }
-                else if (anketa.KolYear >= 8 && anketa.KolYear <= 11)
-                {
-                    intValue = 7000;
-                }
-                else if (anketa.KolYear >= 11 && anketa.KolYear <= 15)
-                {
-                    intValue = 9000;
-                }
-                else if (anketa.KolYear >= 16)
-                {
-                    intValue = 12000;
-                }
+            if (dateTime.AddYears(-64) >= anketa.Birthday)
+            {
+                //   пенсионеры
+                intValue += 5500;
             }
-            
+
             txtVal.Text = intValue.ToString();
 
         }

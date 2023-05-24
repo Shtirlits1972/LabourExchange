@@ -61,7 +61,7 @@
             <Button Content="+" x:Name="btnFamilyStatus" Width="40" Margin="5,0,5,0" Click="btnFamilyStatus_Click"/>
         </DockPanel>
 
-        <TextBlock Text="Контакты" VerticalAlignment="Center" Grid.Row="7" Margin="5" Grid.Column="0"/>
+        <TextBlock Text="Адрес" VerticalAlignment="Center" Grid.Row="7" Margin="5" Grid.Column="0"/>
         <TextBox x:Name="txtKontaktKoord"  VerticalContentAlignment="Bottom"  VerticalAlignment="Center" Height="25" Grid.Row="7" Grid.Column="1"/>
 
         <TextBlock Text="Требования" VerticalAlignment="Center" Grid.Row="8" Margin="5" Grid.Column="0"/>

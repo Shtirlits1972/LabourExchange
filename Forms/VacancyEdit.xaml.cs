@@ -69,11 +69,11 @@ namespace LabourExchange.Forms
                 Error += "Выберите должность \r\n";
             }
 
-            if (comboSex.SelectedItem == null)
-            {
-                IsReady = false;
-                Error += "Выберите пол \r\n";
-            }
+            //if (comboSex.SelectedItem == null)
+            //{
+            //    IsReady = false;
+            //    Error += "Выберите пол \r\n";
+            //}
 
             if (comboWorkScedule.SelectedItem == null)
             {
@@ -95,7 +95,14 @@ namespace LabourExchange.Forms
                 model.WorkSceduleId = ((WorkScedule)comboWorkScedule.SelectedItem).Id;
                 model.WorkSceduleName = ((WorkScedule)comboWorkScedule.SelectedItem).Name;
 
-                model.Sex = ((string)comboSex.SelectedItem);
+                if(comboSex.SelectedItem != null)
+                {
+                    model.Sex = ((string)comboSex.SelectedItem);
+                }
+                else
+                {
+                    model.Sex = string.Empty; ;
+                }
 
                 if (IsEdit)
                 {

@@ -24,27 +24,40 @@ namespace LabourExchange
         {
             LocalizationManager.Manager = new CustomLocalizationManager();
             InitializeComponent();
+            this.Closing += MainWindow_Closing;
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Хотите выйти?", "Внимание!", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+            {
+                e.Cancel = false;
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Login login = new Login();
-            login.Owner = this;
-            login.ShowDialog();
+            //Login login = new Login();
+            //login.Owner = this;
+            //login.ShowDialog();
 
-            if (login.IsRegister)
-            {
-                RegisterNewAnketaView registerNew = new RegisterNewAnketaView();
-                registerNew.ShowDialog();
+            //if (login.IsRegister)
+            //{
+            //    RegisterNewAnketaView registerNew = new RegisterNewAnketaView();
+            //    registerNew.ShowDialog();
 
-                if (!registerNew.IsReg)
-                {
-                    Close();
-                }
-            }
+            //    if (!registerNew.IsReg)
+            //    {
+            //        Close();
+            //    }
+            //}
 
-            //Users users = new Users { Id = 1, Login = "admin", Role = "admin" };
-            //Ut.currentUser = users;
+            Users users = new Users { Id = 1, Login = "admin", Role = "admin" };
+            Ut.currentUser = users;
 
             MenuExit.Visibility = Visibility.Visible;
 
@@ -82,10 +95,7 @@ namespace LabourExchange
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-          if(MessageBox.Show("Хотите выйти?", "Внимание!", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
-                {
-                 Close();
-            }
+            this.Close();
         }
 
         private void FamilyStatusBtn_Click(object sender, RoutedEventArgs e)
@@ -159,5 +169,7 @@ namespace LabourExchange
             frmContent.NavigationService.Navigate(new Uri("Forms/Find_Vacancy_BezWork_Page.xaml", UriKind.Relative));
             Title = "Поиск";
         }
+
+
     }
 }
