@@ -41,23 +41,23 @@ namespace LabourExchange
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Login login = new Login();
-            login.Owner = this;
-            login.ShowDialog();
+            //Login login = new Login();
+            //login.Owner = this;
+            //login.ShowDialog();
 
-            if (login.IsRegister)
-            {
-                RegisterNewAnketaView registerNew = new RegisterNewAnketaView();
-                registerNew.ShowDialog();
+            //if (login.IsRegister)
+            //{
+            //    RegisterNewAnketaView registerNew = new RegisterNewAnketaView();
+            //    registerNew.ShowDialog();
 
-                if (!registerNew.IsReg)
-                {
-                    Close();
-                }
-            }
+            //    if (!registerNew.IsReg)
+            //    {
+            //        Close();
+            //    }
+            //}
 
-            //Users users = new Users { Id = 1, Login = "admin", Role = "admin" };
-            //Ut.currentUser = users;
+            Users users = new Users { Id = 1, Login = "admin", Role = "admin" };
+            Ut.currentUser = users;
 
             MenuExit.Visibility = Visibility.Visible;
 

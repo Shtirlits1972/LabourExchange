@@ -34,15 +34,7 @@ namespace LabourExchange.Forms
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
             model.Name = txtName.Text;
-
-            bool isFree = WorkSceduleCrud.NameIsFree(txtName.Text);
-
-            if (!isFree)
-            {
-                MessageBox.Show("Такое название уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
+          //  int count = WorkSceduleCrud.NameIsFree(txtName.Text);
             int intDuration = 0;
 
             if(int.TryParse(txtDuration.Text.Replace("_","").Trim(), out intDuration))
@@ -50,13 +42,31 @@ namespace LabourExchange.Forms
                 model.duration = intDuration;
             }
 
+            bool flag = WorkSceduleCrud.CheckFreeName(model);
+
             if (IsEdit)
             {
-                WorkSceduleCrud.Edit(model);
+                if (!flag)
+                {
+                    MessageBox.Show("Такое название уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else if(flag)
+                {
+                    WorkSceduleCrud.Edit(model);
+                }
             }
             else
             {
-                model = WorkSceduleCrud.Add(model);
+                if (!flag)
+                {
+                    MessageBox.Show("Такое название уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else if(flag)
+                {
+                    model = WorkSceduleCrud.Add(model);
+                }
             }
             Close();
         }

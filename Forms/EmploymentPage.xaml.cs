@@ -93,13 +93,13 @@ namespace LabourExchange.Forms
             Usloviya.Content = vac.UsloviyWorkOplata;
             Trebovanie.Content = vac.Trebovan;
 
-            if(listVacancy.Count == 0)
+            if (listVacancy.Count == 0)
             {
                 lblNumber.Content = "0";
             }
             else
             {
-                lblNumber.Content = intCurrentVacation+1;
+                lblNumber.Content = intCurrentVacation + 1;
             }
             lblAllNumber.Content = listVacancy.Count;
         }
@@ -212,6 +212,10 @@ namespace LabourExchange.Forms
 
             lblProfession.Content = bezWork.Professional;
             lblStag.Content = bezWork.Stag;
+
+            listVacancy.Clear();
+            Vacancy empty = new Vacancy { Id = 0, EducationId = 0, EducationName = "", FirmaId = 0, FirmaName = "", PositionId = 0, PositionName = "", Priznak = false, qty = 0, Sex = "", Trebovan = "", UsloviyWorkOplata = "", WorkSceduleId = 0, WorkSceduleName = "" };
+            SetvacancyAttr(empty);
         }
     }
 }

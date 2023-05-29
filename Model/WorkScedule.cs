@@ -8,9 +8,9 @@ namespace LabourExchange.Model
 {
     public class WorkScedule
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int duration { get; set; }
+        public int Id { get; set; } = 0;
+        public string Name { get; set; } = "";
+        public int duration { get; set; } = 0;
 
         public override string ToString()
         {

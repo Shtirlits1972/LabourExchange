@@ -7,6 +7,7 @@ using LabourExchange.Model;
 using Dapper;
 using System.Data.SqlClient;
 using System.Data;
+using System.Xml.Linq;
 
 namespace LabourExchange.CRUD
 {
@@ -14,25 +15,27 @@ namespace LabourExchange.CRUD
     {
         public static readonly string strConn = Ut.strConn;
 
-        public static bool NameIsFree(string Name)
+        public static bool CheckFreeName(WorkScedule model)
         {
             bool flag = false;
-
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                int count = db.Query<int>(" SELECT COUNT(*)q FROM WorkScedule WHERE UPPER([Name]) = UPPER(@Name); ", new { Name }).FirstOrDefault();
+                string query = " SELECT COUNT(*)q FROM WorkScedule WHERE UPPER([Name]) = UPPER(@Name)  AND Id != @Id ; ";
+                int count = db.Query<int>(query, model).FirstOrDefault();
 
                 if (count == 0)
                 {
-                    flag = true;
+                    flag = true; // можно инсёртить или апдейтить!
                 }
                 else if (count > 0)
                 {
                     flag = false;
                 }
-                return flag;
             }
+
+            return flag;
         }
+
         public static List<WorkScedule> GetAll()
         {
             List<WorkScedule> list = new List<WorkScedule>();

@@ -25,7 +25,6 @@ namespace LabourExchange.Forms
         {
             InitializeComponent();
 
-            comboAnketa.ItemsSource = AnketaCrud.GetAll_ForNew_Bezwork();
             comboEducation.ItemsSource = EducationCrud.GetAll();
             comboPosition.ItemsSource = PositionCrud.GetAll();
             comboFamilyStatus.ItemsSource = FamilyStatusCrud.GetAll();
@@ -105,6 +104,7 @@ namespace LabourExchange.Forms
         {
             if (IsEdit)
             {
+                comboAnketa.ItemsSource = AnketaCrud.GetAll();
                 #region Anketa
                 for (int i = 0; i < comboAnketa.Items.Count; i++)
                 {
@@ -161,6 +161,10 @@ namespace LabourExchange.Forms
                 txtTrebov_K_Work.Text = model.Trebov_K_Work;
 
                 checkArhiv.IsChecked = model.Arhiv;
+            }
+            else
+            {
+                comboAnketa.ItemsSource = AnketaCrud.GetAll_ForNew_Bezwork();
             }
         }
         private void btnAddEducation_Click(object sender, RoutedEventArgs e)
