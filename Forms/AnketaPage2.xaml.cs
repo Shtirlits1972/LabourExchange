@@ -132,11 +132,22 @@ namespace LabourExchange.Forms
                 if (System.Windows.MessageBox.Show("Хотите удалить?", "Внимание", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
                 {
                     Anketa model = (Anketa)mainGrid.SelectedItem;
-                    AnketaCrud.Del(model.Id);
 
-                    AnketaList.Remove(model);
-                    mainGrid.ItemsSource = AnketaList;
-                    mainGrid.Rebind();
+                    AnketaCrud.CheckResult res = AnketaCrud.CanDelete(model.Id);
+
+                    if(res.flag)
+                    {
+                        AnketaCrud.Del(model.Id);
+
+                        AnketaList.Remove(model);
+                        mainGrid.ItemsSource = AnketaList;
+                        mainGrid.Rebind();
+                    }
+                    else
+                    {
+                        MessageBox.Show(res.Reason, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    }
+
                 }
             }
             else

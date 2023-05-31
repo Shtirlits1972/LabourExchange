@@ -60,6 +60,66 @@ namespace LabourExchange.CRUD
 
             return model;
         }
+
+        public static CheckResult CanDelete(int AnketaId)
+        {
+            CheckResult checkResult = new CheckResult {flag = true, Reason = string.Empty };
+            bool bezFlag = checkBezWork(AnketaId);
+            bool benefitFlag = checkBenefit(AnketaId);
+
+            if(!bezFlag)
+            {
+                checkResult.flag = false; 
+                checkResult.Reason += "Необходимо удалить безработного\r\n";
+            }
+
+            if(!benefitFlag)
+            {
+                checkResult.flag = false;
+                checkResult.Reason += "Необходимо удалить пособие\r\n";
+            }
+
+            return checkResult;
+        }
+
+        private static bool checkBenefit(int AnketaId)
+        {
+            bool flag = false;
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                int count = db.Query<int>(" SELECT * FROM Benefit WHERE AnketaId = @AnketaId; ", new { AnketaId }).FirstOrDefault();
+
+                if (count == 0)
+                {
+                    return true;
+                }
+                else if (count > 0)
+                {
+                    return false;
+                }
+            }
+            return flag;
+        }
+
+        private static bool checkBezWork(int AnketaId)
+        {
+            bool flag = false;
+            using (IDbConnection db = new SqlConnection(strConn))
+            {
+                int count = db.Query<int>("select COUNT(*)q from BezWork where AnketaId = @AnketaId; ", new { AnketaId }).FirstOrDefault();
+
+                if (count == 0)
+                {
+                    return true;
+                }
+                else if (count > 0)
+                {
+                    return false;
+                }
+            }
+            return flag;
+        }
+
         public static void Del(int Id)
         {
             using (IDbConnection db = new SqlConnection(strConn))
@@ -77,11 +137,11 @@ namespace LabourExchange.CRUD
                 {
                     db.Execute(Query, model);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     string Error = ex.Message;
                 }
-               
+
             }
         }
         public static Anketa Add(Anketa model)
@@ -200,8 +260,13 @@ namespace LabourExchange.CRUD
             }
 
             return flag;
-        } 
+        }
         #endregion
 
+        public class CheckResult
+        {
+            public  bool flag { get; set; } = false;
+            public  string Reason { get; set; } = string.Empty;
+        }
     }
 }

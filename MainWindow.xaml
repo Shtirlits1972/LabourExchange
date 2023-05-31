@@ -6,7 +6,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:local="clr-namespace:LabourExchange"
         mc:Ignorable="d"
-        Title="Служба занятости" Height="600" Width="1200" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        
+        Title="Служба занятости" Height="600" Width="1200" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="/h3.ico">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -152,7 +153,7 @@
 
         </DockPanel>
         <DockPanel Grid.Row="1" >
-            <Frame NavigationUIVisibility="Automatic" Name="frmContent" Source="Forms/ScreenPage.xaml" />
+            <Frame NavigationUIVisibility="Hidden"  Name="frmContent" Source="Forms/ScreenPage.xaml" />
         </DockPanel>
     </Grid>
 </Window>
