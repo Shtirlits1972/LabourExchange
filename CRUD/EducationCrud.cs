@@ -33,7 +33,6 @@ namespace LabourExchange.CRUD
                 return flag;
             }
         }
-
         public static List<Education> GetAll()
         {
             List<Education> list = new List<Education>();

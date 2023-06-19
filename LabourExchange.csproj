@@ -258,6 +258,9 @@
     <Compile Include="Forms\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PositionEdit.xaml.cs">
       <DependentUpon>PositionEdit.xaml</DependentUpon>
     </Compile>
@@ -284,11 +287,6 @@
     </Compile>
     <Compile Include="Forms\WorkScedulePage.xaml.cs">
       <DependentUpon>WorkScedulePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LabExDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LabExDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Model\Anketa.cs" />
     <Compile Include="Model\Benefit.cs" />
@@ -378,6 +376,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\PositionEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -445,17 +447,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="LabExDataSet.xsc">
-      <DependentUpon>LabExDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="LabExDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>LabExDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="LabExDataSet.xss">
-      <DependentUpon>LabExDataSet.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -467,7 +458,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Screen.png" />
+    <Content Include="Screen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="h3.ico" />

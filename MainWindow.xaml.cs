@@ -29,51 +29,60 @@ namespace LabourExchange
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Хотите выйти?", "Внимание!", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
-            {
-                e.Cancel = false;
-            }
-            else
-            {
-                e.Cancel = true;
-            }
+            //if (MessageBox.Show("Хотите выйти?", "Внимание!", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+            //{
+            //    e.Cancel = false;
+            //}
+            //else
+            //{
+            //    e.Cancel = true;
+            //}
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Login login = new Login();
-            login.Owner = this;
-            login.ShowDialog();
+            //Login login = new Login();
+            //login.Owner = this;
+            //login.ShowDialog();
 
-            if (login.IsRegister)
-            {
-                RegisterNewAnketaView registerNew = new RegisterNewAnketaView();
-                registerNew.ShowDialog();
+            //if(login.IsClosedByUser)
+            //{
+            //    Close();
+            //}
 
-                if (!registerNew.IsReg)
-                {
-                    Close();
-                }
-            }
+            //if (login.IsRegister)
+            //{
+            //    RegisterNewAnketaView registerNew = new RegisterNewAnketaView();
+            //    registerNew.ShowDialog();
 
-            //Users users = new Users { Id = 1, Login = "admin", Role = "admin" };
-            //Ut.currentUser = users;
+            //    if (!registerNew.IsReg)
+            //    {
+            //        Close();
+            //    }
+            //}
 
-            MenuExit.Visibility = Visibility.Visible;
+            //MenuExit.Visibility = Visibility.Visible;
 
-            if (Ut.currentUser.Role == "admin")
-            {
-                MenuReferences.Visibility = Visibility.Visible;
-                MenuBezWorkFindJob.Visibility = Visibility.Visible;
-                MenuFindInPage.Visibility = Visibility.Visible;
-                MenuEmployment.Visibility = Visibility.Visible;
-                MenuParam.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                frmContent.NavigationService.Navigate(new Uri("Forms/AnketaUserPage.xaml", UriKind.Relative));
-                Title = "Личный кабинет";
-            }
+            //if (Ut.currentUser.Role == "admin")
+            //{
+            //    MenuReferences.Visibility = Visibility.Visible;
+            //    MenuBezWorkFindJob.Visibility = Visibility.Visible;
+            //    MenuFindInPage.Visibility = Visibility.Visible;
+            //    MenuEmployment.Visibility = Visibility.Visible;
+            //    MenuParam.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    if(!login.IsClosedByUser)
+            //    {
+            //        frmContent.NavigationService.Navigate(new Uri("Forms/AnketaUserPage.xaml", UriKind.Relative));
+            //        Title = "Личный кабинет";
+            //    }
+            //    else
+            //    {
+            //        Close();
+            //    }
+            //}
         }
 
         private void ExitClick(object sender, RoutedEventArgs e)
@@ -169,7 +178,5 @@ namespace LabourExchange
             frmContent.NavigationService.Navigate(new Uri("Forms/Find_Vacancy_BezWork_Page.xaml", UriKind.Relative));
             Title = "Поиск";
         }
-
-
     }
 }
