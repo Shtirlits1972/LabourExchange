@@ -7,8 +7,9 @@
         xmlns:local="clr-namespace:LabourExchange.Forms"
         mc:Ignorable="d"
         Closing="Window_Closing"
+        WindowStyle="None"
         Title="Авторизация" Height="180" Width="400" 
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" >
 
     <Window.Resources>
         <ResourceDictionary>

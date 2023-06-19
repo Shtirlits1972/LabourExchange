@@ -33,7 +33,7 @@ namespace LabourExchange.Forms
         public EmploymentPage()
         {
             InitializeComponent();
-            comboAnketa.ItemsSource = BezWorkCrud.GetAll();
+            comboAnketa.ItemsSource = BezWorkCrud.GetAll().Where(x=>x.Arhiv == false).ToList();
             comboAnketa.SelectedIndex = 0;
         }
 
